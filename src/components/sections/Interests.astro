@@ -7,8 +7,12 @@ const { interests } = personal;
     Interests
   </p>
   <div class="flex flex-wrap gap-x-3 gap-y-1.5">
-    {interests.map((item) => (
-      <span class="text-xs text-neutral-500 dark:text-neutral-400">{item}</span>
-    ))}
+    {interests.map((item) =>
+      typeof item === 'string' ? (
+        <span class="text-xs text-neutral-500 dark:text-neutral-400">{item}</span>
+      ) : (
+        <a href={item.url} target="_blank" rel="noopener noreferrer" class="text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline underline-offset-2">{item.label}</a>
+      )
+    )}
   </div>
 </div>

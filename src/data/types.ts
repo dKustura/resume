@@ -58,5 +58,5 @@ export interface Personal {
   linkedin: string;
   github: string;
   avatar: string;
-  interests: readonly string[];
+  interests: readonly (string | { label: string; url: string })[];
 }
