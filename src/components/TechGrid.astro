@@ -1,0 +1,44 @@
+---
+interface TechItem {
+  name: string;
+  icon: string | null;
+  darkInvert?: boolean;
+}
+interface TechGroup {
+  label: string;
+  items: TechItem[];
+}
+interface Props {
+  groups: TechGroup[];
+}
+const { groups } = Astro.props;
+---
+<div class="px-8 py-8 space-y-6">
+  <p class="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+    Technologies
+  </p>
+  {groups.map((group) => (
+    <div class="space-y-2">
+      <p class="text-xs text-neutral-400 dark:text-neutral-500">{group.label}</p>
+      <div class="flex flex-wrap gap-1.5">
+        {group.items.map((item) => (
+          <button
+            type="button"
+            data-tech={item.name}
+            class="sidebar-pill tech-pill inline-flex items-center gap-1.5 px-3 py-1 text-xs rounded-md bg-neutral-100 dark:bg-neutral-800/80 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 hover:border-emerald-400 dark:hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors cursor-pointer"
+          >
+            {item.icon && (
+              <img
+                src={`https://cdn.simpleicons.org/${item.icon}`}
+                class:list={["w-3 h-3", { "dark:invert": item.darkInvert }]}
+                alt=""
+                onerror="this.style.display='none'"
+              />
+            )}
+            {item.name}
+          </button>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>

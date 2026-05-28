@@ -48,6 +48,9 @@ html.dark .tech-pill.active {
   border-color: rgb(16 185 129 / 0.5);      /* emerald-500/50 */
 }
 
+/* Safelist: dark:invert (used dynamically in index.astro techGroups) */
+@source inline("dark:invert");
+
 /* Pop-in animation for download button */
 @keyframes fade-up-in {
   0% { opacity: 0; transform: translateY(8px); }
@@ -58,14 +61,10 @@ html.dark .tech-pill.active {
   animation: fade-up-in 0.25s ease-out both;
 }
 
-/* Fade-in animation for scroll reveals */
-.fade-up {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
+@media (prefers-reduced-motion: reduce) {
+  .btn-pop {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
