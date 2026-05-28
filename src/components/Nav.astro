@@ -1,0 +1,19 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header
+  class="sticky top-0 z-50 bg-[#fafafa]/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
+>
+  <nav
+    class="max-w-6xl mx-auto px-8 h-14 flex items-center justify-between border-x border-neutral-200 dark:border-neutral-800"
+  >
+    <a
+      href="#"
+      class="text-sm font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 hover:opacity-70 transition-opacity"
+    >
+      DK
+    </a>
+    <ThemeToggle />
+  </nav>
+</header>

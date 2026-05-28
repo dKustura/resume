@@ -1,0 +1,103 @@
+---
+import CompanyIcon, { type IconType } from './CompanyIcon.astro';
+
+interface Props {
+  role: string;
+  company: string;
+  companyUrl: string;
+  iconType: IconType;
+  period: string;
+  tech?: string[];
+  bullets?: string[];
+  note?: string;
+}
+
+const {
+  role,
+  company,
+  companyUrl,
+  iconType,
+  period,
+  tech = [],
+  bullets = [],
+  note,
+} = Astro.props;
+---
+
+<article>
+  <div class="px-8 py-7">
+    <div class="flex items-start justify-between gap-4 flex-wrap">
+      <div>
+        <h3 class="font-medium text-emerald-600 dark:text-emerald-400">
+          {role}
+        </h3>
+        <a
+          href={companyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors mt-0.5"
+        >
+          <CompanyIcon type={iconType} class="w-3.5 h-3.5 shrink-0" />
+          {company}
+          {
+            note && (
+              <span class="text-neutral-400 dark:text-neutral-600">
+                {' '}
+                · {note}
+              </span>
+            )
+          }
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="10"
+            height="10"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="opacity-40 -mb-px"
+          >
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+            ></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+      </div>
+      <p
+        class="text-sm font-mono text-neutral-500 dark:text-neutral-400 mt-1 tabular-nums"
+      >
+        {period}
+      </p>
+    </div>
+
+    {
+      tech.length > 0 && (
+        <div class="flex flex-wrap gap-1.5 mt-4">
+          {tech.map((t) => (
+            <span
+              data-tech={t}
+              class="tech-pill px-3 py-1 text-xs rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 transition-colors cursor-default"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      bullets.length > 0 && (
+        <ul class="mt-4 space-y-1.5">
+          {bullets.map((b) => (
+            <li class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-3 relative before:content-['–'] before:absolute before:left-0 before:text-neutral-300 dark:before:text-neutral-600">
+              {b}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</article>

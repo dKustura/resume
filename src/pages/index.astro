@@ -1,11 +1,827 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import ExperienceItem from '../components/ExperienceItem.astro';
+import ProjectItem from '../components/ProjectItem.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const experience = [
+  {
+    role: 'Senior Frontend Engineer',
+    company: 'Neota Logic',
+    companyUrl: 'https://neota.com',
+    iconType: 'legal' as const,
+    period: 'Sep 2022 – Present',
+    tech: ['React', 'TypeScript', 'GraphQL', 'CKEditor'],
+    bullets: [
+      'No-code platform that lets lawyers, accountants, compliance officers, consultants, and other non-programmers build web applications.',
+      'Development and maintenance of the core front-end functionality — theming, building blocks, logic editors, authoring utilities, real-time updates, and validation.',
+      'Development of advanced rich text editing experiences on CKEditor, integrating custom interactive and dynamic components that connect document content to underlying business logic.',
+    ],
+  },
+  {
+    role: 'Freelance Software Engineer',
+    company: 'Codequst',
+    companyUrl: 'https://codequst.com',
+    iconType: 'software' as const,
+    period: 'Jul 2022 – Present',
+    tech: ['React', 'TypeScript', 'GraphQL', '.NET', 'Node.js', 'NestJS'],
+    bullets: [
+      'Building a real-time IDE for a no-code platform on the web, among other client projects.',
+    ],
+  },
+  {
+    role: 'Senior Frontend Engineer',
+    company: 'heyPatient',
+    companyUrl: 'https://en.heypatient.com',
+    iconType: 'healthcare' as const,
+    period: 'Sep 2023 – Feb 2024',
+    tech: ['React', 'TypeScript', 'Next.js', 'GraphQL', 'Sentry'],
+    note: 'Part-time',
+    bullets: [
+      'A digital health platform used by hospitals to streamline patient data management and appointment workflows.',
+      'Led the frontend implementation of a Medical ID OCR scanning feature deployed on specialized hospital terminals — dedicated hardware stations that let staff digitize patient identification documents in seconds rather than entering data manually.',
+      'Developed and improved patient-facing and staff-facing dashboards, data management interfaces, and clinical forms used across hospital workflows.',
+    ],
+  },
+  {
+    role: 'Fullstack Software Engineer',
+    company: 'Infobip',
+    companyUrl: 'https://www.infobip.com',
+    iconType: 'communications' as const,
+    period: 'Feb 2021 – Jun 2022',
+    tech: [
+      'React',
+      'Redux',
+      'TypeScript',
+      'Webpack',
+      '.NET Core',
+      'MS SQL Server',
+      'Docker',
+    ],
+    bullets: [
+      'Built and maintained internal tools powering the company\'s SMS service management at a CPaaS company operating at significant scale.',
+      'Projects spanned routing, billing, analytics, and internal user configuration across one of the core product lines.',
+    ],
+  },
+  {
+    role: 'Fullstack Software Engineer',
+    company: 'AVL',
+    companyUrl: 'https://www.avl.com/en',
+    iconType: 'automotive' as const,
+    period: 'Mar 2019 – Jan 2021',
+    tech: [
+      'React',
+      'Redux',
+      'TypeScript',
+      'Cypress',
+      'Material UI',
+      '.NET Core',
+      'MySQL',
+    ],
+    bullets: [
+      'Built web applications delivered to automotive OEMs including Ford and Daimler/Mercedes-Benz.',
+      'Projects included vehicle and parts management systems, manufacturing pipeline tools, and related internal platforms.',
+    ],
+  },
+  {
+    role: 'Fullstack Software Engineer',
+    company: 'Ericsson Nikola Tesla',
+    companyUrl: 'https://ericssonnikolatesla.com',
+    iconType: 'cloud' as const,
+    period: 'Jul 2017 – Dec 2017',
+    tech: ['JavaScript', 'D3.js', 'Node.js'],
+    bullets: [],
+  },
+];
+
+const projects = [
+  {
+    title: 'Various static sites',
+    description:
+      'Website for an event planning company and a personal bookshelf website.',
+    period: '2021 – Present',
+    tech: ['Astro'],
+  },
+  {
+    title: 'Codequst',
+    description: 'Own software agency website.',
+    period: '2022 – Present',
+    link: 'https://codequst.com',
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+  },
+  {
+    title: 'Nutripoint',
+    description:
+      'Nutrition tracking and plan management app for nutritionists and their clients.',
+    period: '2021 – 2022',
+    tech: ['React', 'Redux', 'TypeScript', 'NestJS', 'Prisma', 'PostgreSQL'],
+  },
+  {
+    title: 'Airsoft Zadar',
+    description:
+      'Presentation and CMS web app for a local sports recreation club.',
+    period: '2020 – 2021',
+    tech: [
+      'React',
+      'Redux',
+      'TypeScript',
+      'Firebase',
+      'Firestore',
+      'Google Cloud Functions',
+    ],
+  },
+  {
+    title: 'Rudimentary social network',
+    description:
+      'University project — a basic social network with real-time features.',
+    period: 'Sep 2016 – Jan 2017',
+    tech: ['Node.js', 'Express.js', 'Socket.io', 'MongoDB', 'Heroku'],
+  },
+];
+
+const research = [
+  {
+    title: 'Early Depression Detection from Language Use',
+    description:
+      'NLP pipeline for early depression detection from text, based on collaborative filtering and language analysis. Published as part of the Text Analysis and Retrieval course at the University of Zagreb.',
+    period: 'Mar – Jul 2018',
+    link: 'https://www.fer.unizg.hr/_download/repository/TAR-2018-ProjectReports.pdf',
+    tech: ['Python', 'NLP'],
+    subtitle:
+      'Scientific paper — team of 3 (Andrija Perušić, Ivan Matak, Denis Kustura)',
+  },
+];
+
+const education = [
+  {
+    degree: 'Master of Science in Computing',
+    school: 'University of Zagreb, FER',
+    period: 'Sep 2017 – Jul 2019',
+  },
+  {
+    degree: 'Bachelor of Science in Computing',
+    school: 'University of Zagreb, FER',
+    period: 'Sep 2014 – Jul 2017',
+  },
+];
+
+const techGroups = [
+  {
+    label: 'Frontend',
+    items: [
+      { name: 'React', icon: 'react' },
+      { name: 'Redux', icon: 'redux' },
+      { name: 'Next.js', icon: 'nextdotjs', darkInvert: true },
+      { name: 'Tailwind CSS', icon: 'tailwindcss' },
+      { name: 'Material UI', icon: 'mui' },
+      { name: 'shadcn/ui', icon: null },
+      { name: 'SCSS', icon: 'sass' },
+      { name: 'Astro', icon: 'astro' },
+      { name: 'Vite', icon: 'vite' },
+      { name: 'D3.js', icon: 'd3dotjs' },
+    ],
+  },
+  {
+    label: 'Languages',
+    items: [
+      { name: 'JavaScript', icon: 'javascript' },
+      { name: 'TypeScript', icon: 'typescript' },
+      { name: 'Python', icon: 'python' },
+      { name: 'C#', icon: 'csharp' },
+    ],
+  },
+  {
+    label: 'Backend & API',
+    items: [
+      { name: 'Node.js', icon: 'nodedotjs' },
+      { name: 'NestJS', icon: 'nestjs' },
+      { name: 'Express.js', icon: 'express', darkInvert: true },
+      { name: 'GraphQL', icon: 'graphql' },
+      { name: '.NET', icon: 'dotnet' },
+    ],
+  },
+  {
+    label: 'Databases',
+    items: [
+      { name: 'PostgreSQL', icon: 'postgresql' },
+      { name: 'MySQL', icon: 'mysql' },
+      { name: 'MS SQL Server', icon: 'microsoftsqlserver' },
+      { name: 'MongoDB', icon: 'mongodb' },
+      { name: 'Prisma', icon: 'prisma', darkInvert: true },
+      { name: 'Firebase', icon: 'firebase' },
+    ],
+  },
+  {
+    label: 'Testing & Monitoring',
+    items: [
+      { name: 'Cypress', icon: 'cypress', darkInvert: true },
+      { name: 'Playwright', icon: 'playwright' },
+      { name: 'Sentry', icon: 'sentry', darkInvert: true },
+    ],
+  },
+  {
+    label: 'Tools & Infra',
+    items: [
+      { name: 'Git', icon: 'git' },
+      { name: 'Docker', icon: 'docker' },
+      { name: 'Google Cloud', icon: 'googlecloud' },
+      { name: 'Claude', icon: 'anthropic', darkInvert: true },
+    ],
+  },
+];
 ---
 
 <Layout>
-	<Welcome />
+  <Nav />
+  <div
+    class="max-w-6xl mx-auto border-x border-b border-neutral-200 dark:border-neutral-800"
+  >
+    <!--
+      Mobile layout (flex-col):  order-1 profile → order-2 main → order-3 tech
+      Desktop layout (grid):     col-1 main (row-span-2) | col-2 profile (row-1) + tech (row-2)
+    -->
+    <div class="flex flex-col md:grid md:grid-cols-[1fr_300px]">
+      <!-- ── SIDEBAR TOP: profile + education ─────────────────────────────── -->
+      <!-- Mobile: first | Desktop: right column, first row -->
+      <!-- Mobile-only sidebar top: shown above main content on small screens -->
+      <aside
+        class="order-1 md:hidden border-b border-neutral-200 dark:border-neutral-800"
+      >
+        <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
+          <!-- Profile -->
+          <div class="px-8 py-8">
+            <div class="flex items-start gap-4">
+              <div
+                class="w-20 h-20 rounded-full overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center shrink-0"
+              >
+                <img
+                  src="/avatar.jpeg"
+                  alt="Denis Kustura"
+                  class="w-full h-full object-cover"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <span
+                  class="text-sm font-semibold text-neutral-400 dark:text-neutral-500 hidden"
+                  >DK</span
+                >
+              </div>
+              <div class="flex-1 min-w-0">
+                <h1
+                  class="text-lg font-semibold tracking-tight text-neutral-900 dark:text-neutral-100"
+                >
+                  Denis Kustura
+                </h1>
+                <p
+                  class="text-sm text-emerald-600 dark:text-emerald-400 mt-0.5"
+                >
+                  Senior Software Engineer
+                </p>
+                <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2">
+                  <a
+                    href="mailto:denis@codequst.com"
+                    class="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"
+                      ></path>
+                    </svg>
+                    Email
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/denis-kustura"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                      ></path>
+                      <rect x="2" y="9" width="4" height="12"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    LinkedIn
+                  </a>
+                  <a
+                    href="https://github.com/dKustura"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                      ></path>
+                    </svg>
+                    GitHub
+                  </a>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="btn-pop hidden sm:inline-flex shrink-0 items-center gap-2 px-3 py-2 text-sm font-medium rounded-md border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Resume
+              </button>
+            </div>
+            <button
+              type="button"
+              class="btn-pop sm:hidden w-full justify-center inline-flex items-center gap-2 px-4 py-2 mt-4 text-sm font-medium rounded-md border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Resume
+            </button>
+          </div>
+
+          <!-- Education -->
+          <div class="px-8 py-8 space-y-4">
+            <p
+              class="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+            >
+              Education
+            </p>
+            <div class="space-y-5">
+              {
+                education.map((item) => (
+                  <div>
+                    <p class="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                      {item.degree}
+                    </p>
+                    <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+                      {item.school}
+                    </p>
+                    <p class="text-xs text-neutral-400 dark:text-neutral-500 tabular-nums mt-0.5">
+                      {item.period}
+                    </p>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+        <!-- end divide-y wrapper -->
+      </aside>
+
+      <!-- ── MAIN CONTENT ───────────────────────────────────────────────── -->
+      <div
+        class="order-2 md:col-start-1 md:row-start-1 md:border-r border-neutral-200 dark:border-neutral-800"
+      >
+        <!-- Work Experience -->
+        <section
+          id="experience"
+          class="divide-y divide-neutral-200 dark:divide-neutral-800 border-b border-neutral-200 dark:border-neutral-800"
+        >
+          <div class="px-8 py-8">
+            <p
+              class="text-xs font-medium uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-1.5"
+            >
+              Career
+            </p>
+            <h2
+              class="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100"
+            >
+              Work Experience
+            </h2>
+          </div>
+          {experience.map((item) => <ExperienceItem {...item} />)}
+        </section>
+
+        <!-- Side Projects -->
+        <section
+          id="projects"
+          class="divide-y divide-neutral-200 dark:divide-neutral-800 border-b border-neutral-200 dark:border-neutral-800"
+        >
+          <div class="px-8 py-8">
+            <p
+              class="text-xs font-medium uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-1.5"
+            >
+              Other Work
+            </p>
+            <h2
+              class="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100"
+            >
+              Side Projects
+            </h2>
+          </div>
+          {projects.map((item) => <ProjectItem {...item} />)}
+        </section>
+
+        <!-- Research -->
+        <section
+          id="research"
+          class="divide-y divide-neutral-200 dark:divide-neutral-800"
+        >
+          <div class="px-8 py-8">
+            <p
+              class="text-xs font-medium uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-1.5"
+            >
+              Academic
+            </p>
+            <h2
+              class="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100"
+            >
+              Research
+            </h2>
+          </div>
+          {
+            research.map((item) => (
+              <article>
+                <div class="px-8 py-7">
+                  <div class="flex items-start justify-between gap-4 flex-wrap">
+                    <div>
+                      <h3 class="font-medium text-neutral-900 dark:text-neutral-100">
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="inline-flex items-center gap-1 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                        >
+                          {item.title}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="10"
+                            height="10"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="opacity-40 -mb-px"
+                          >
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
+                          </svg>
+                        </a>
+                      </h3>
+                      <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">
+                        {item.subtitle}
+                      </p>
+                    </div>
+                    <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400 mt-1 shrink-0">
+                      {item.period}
+                    </p>
+                  </div>
+                  <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-3 leading-relaxed">
+                    {item.description}
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 mt-4">
+                    {item.tech.map((t) => (
+                      <span
+                        data-tech={t}
+                        class="tech-pill px-3 py-1 text-xs rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 transition-colors cursor-default"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))
+          }
+        </section>
+      </div>
+
+      <!-- ── DESKTOP SIDEBAR: full sidebar, right column (hidden on mobile) ── -->
+      <aside
+        class="hidden md:block md:col-start-2 md:row-start-1 md:self-start"
+      >
+        <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
+          <div class="px-8 py-8 space-y-5">
+            <div
+              class="w-40 h-40 rounded-full overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center"
+            >
+              <img
+                src="/avatar.jpeg"
+                alt="Denis Kustura"
+                class="w-full h-full object-cover"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <span
+                class="text-xl font-semibold text-neutral-400 dark:text-neutral-500 hidden"
+                >DK</span
+              >
+            </div>
+            <div>
+              <h1
+                class="text-lg font-semibold tracking-tight text-neutral-900 dark:text-neutral-100"
+              >
+                Denis Kustura
+              </h1>
+              <p class="text-sm text-emerald-600 dark:text-emerald-400 mt-0.5">
+                Senior Software Engineer
+              </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+              <a
+                href="mailto:denis@codequst.com"
+                class="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><rect x="2" y="4" width="20" height="16" rx="2"></rect><path
+                    d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg
+                >
+                Email
+              </a>
+              <a
+                href="https://linkedin.com/in/denis-kustura"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  ><path
+                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                  ></path><rect x="2" y="9" width="4" height="12"></rect><circle
+                    cx="4"
+                    cy="4"
+                    r="2"></circle></svg
+                >
+                LinkedIn
+              </a>
+              <a
+                href="https://github.com/dKustura"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  ><path
+                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                  ></path></svg
+                >
+                GitHub
+              </a>
+            </div>
+            <button
+              type="button"
+              class="btn-pop inline-flex w-full justify-center items-center gap-2 px-4 py-2 text-sm font-medium rounded-md border border-neutral-200 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                ></path><polyline points="7 10 12 15 17 10"></polyline><line
+                  x1="12"
+                  y1="15"
+                  x2="12"
+                  y2="3"></line>
+              </svg>
+              Resume
+            </button>
+          </div>
+          <div class="px-8 py-8 space-y-4">
+            <p
+              class="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+            >
+              Education
+            </p>
+            <div class="space-y-5">
+              {
+                education.map((item) => (
+                  <div>
+                    <p class="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                      {item.degree}
+                    </p>
+                    <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+                      {item.school}
+                    </p>
+                    <p class="text-xs text-neutral-400 dark:text-neutral-500 tabular-nums mt-0.5">
+                      {item.period}
+                    </p>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <div class="px-8 py-8 space-y-6">
+            <p
+              class="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+            >
+              Technologies
+            </p>
+            {
+              techGroups.map((group) => (
+                <div class="space-y-2">
+                  <p class="text-xs text-neutral-400 dark:text-neutral-500">
+                    {group.label}
+                  </p>
+                  <div class="flex flex-wrap gap-1.5">
+                    {group.items.map((item) => (
+                      <button
+                        type="button"
+                        data-tech={item.name}
+                        class="sidebar-pill tech-pill inline-flex items-center gap-1.5 px-3 py-1 text-xs rounded-md bg-neutral-100 dark:bg-neutral-800/80 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 hover:border-emerald-400 dark:hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors cursor-pointer"
+                      >
+                        {item.icon && (
+                          <img
+                            src={`https://cdn.simpleicons.org/${item.icon}`}
+                            class={`w-3 h-3 ${item.darkInvert ? 'dark:invert' : ''}`}
+                            alt=""
+                            onerror="this.style.display='none'"
+                          />
+                        )}
+                        {item.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+          <div class="px-8 py-8 space-y-3">
+            <p
+              class="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+            >
+              Interests
+            </p>
+            <div class="flex flex-wrap gap-x-3 gap-y-1.5">
+              {
+                ['Running', 'Road bikes', 'Hiking', 'Books & Audiobooks'].map(
+                  (item) => (
+                    <span class="text-xs text-neutral-500 dark:text-neutral-400">
+                      {item}
+                    </span>
+                  ),
+                )
+              }
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ── MOBILE SIDEBAR BOTTOM: tech + interests (hidden on desktop) ─── -->
+      <aside
+        class="order-3 md:hidden border-t border-neutral-200 dark:border-neutral-800"
+      >
+        <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
+          <!-- Technologies -->
+          <div class="px-8 py-8 space-y-6">
+            <p
+              class="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+            >
+              Technologies
+            </p>
+            {
+              techGroups.map((group) => (
+                <div class="space-y-2">
+                  <p class="text-xs text-neutral-400 dark:text-neutral-500">
+                    {group.label}
+                  </p>
+                  <div class="flex flex-wrap gap-1.5">
+                    {group.items.map((item) => (
+                      <button
+                        type="button"
+                        data-tech={item.name}
+                        class={`sidebar-pill tech-pill inline-flex items-center gap-1.5 px-3 py-1 text-xs rounded-md bg-neutral-100 dark:bg-neutral-800/80 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 hover:border-emerald-400 dark:hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors cursor-pointer`}
+                      >
+                        {item.icon && (
+                          <img
+                            src={`https://cdn.simpleicons.org/${item.icon}`}
+                            class={`w-3 h-3 ${item.darkInvert ? 'dark:invert' : ''}`}
+                            alt=""
+                            onerror="this.style.display='none'"
+                          />
+                        )}
+                        {item.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+
+          <!-- Interests -->
+          <div class="px-8 py-8 space-y-3">
+            <p
+              class="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+            >
+              Interests
+            </p>
+            <div class="flex flex-wrap gap-x-3 gap-y-1.5">
+              {
+                ['Running', 'Road bikes', 'Hiking', 'Books & Audiobooks'].map(
+                  (item) => (
+                    <span class="text-xs text-neutral-500 dark:text-neutral-400">
+                      {item}
+                    </span>
+                  ),
+                )
+              }
+            </div>
+          </div>
+        </div>
+        <!-- end divide-y wrapper -->
+      </aside>
+    </div>
+
+    <footer
+      class="border-t border-neutral-200 dark:border-neutral-800 px-8 py-5"
+    >
+      <p class="text-xs text-neutral-400 dark:text-neutral-600">
+        Denis Kustura &copy; {new Date().getFullYear()}
+      </p>
+    </footer>
+  </div>
 </Layout>
+
+<script>
+  const activeSet = new Set<string>();
+
+  function syncPills() {
+    document.querySelectorAll<HTMLElement>('.tech-pill').forEach((el) => {
+      const tech = el.dataset.tech;
+      el.classList.toggle('active', !!tech && activeSet.has(tech));
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('.sidebar-pill').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tech = btn.dataset.tech;
+      if (!tech) return;
+      activeSet.has(tech) ? activeSet.delete(tech) : activeSet.add(tech);
+      syncPills();
+    });
+  });
+</script>
