@@ -1,13 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import ExperienceItem from '../components/ExperienceItem.astro';
-import ProjectItem from '../components/ProjectItem.astro';
-import ResearchItem from '../components/ResearchItem.astro';
-import ProfileSection from '../components/ProfileSection.astro';
-import EducationSection from '../components/EducationSection.astro';
-import TechGrid from '../components/TechGrid.astro';
-import Interests from '../components/Interests.astro';
+import { Nav } from '../components/ui';
+import { ExperienceItem, ProjectItem, ResearchItem } from '../components/items';
+import { ProfileSection, EducationSection, TechGrid, Interests } from '../components/sections';
 import { experience, projects, research, education, techGroups } from '../data';
 
 ---
