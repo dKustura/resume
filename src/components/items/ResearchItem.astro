@@ -9,6 +9,7 @@ interface Props {
 }
 const { title, link, subtitle, description, period, tech = [] } = Astro.props;
 ---
+
 <article>
   <div class="px-8 py-7">
     <div class="flex items-start justify-between gap-4 flex-wrap">
@@ -33,36 +34,47 @@ const { title, link, subtitle, description, period, tech = [] } = Astro.props;
               stroke-linejoin="round"
               class="opacity-40 -mb-px"
             >
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+              ></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
             </svg>
           </a>
         </h3>
-        {subtitle && (
-          <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">{subtitle}</p>
-        )}
+        {
+          subtitle && (
+            <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">
+              {subtitle}
+            </p>
+          )
+        }
       </div>
-      <p class="text-xs font-mono text-neutral-500 dark:text-neutral-400 mt-1 shrink-0 tabular-nums">
+      <p
+        class="text-xs font-mono text-neutral-500 dark:text-neutral-400 mt-1 shrink-0 tabular-nums"
+      >
         {period}
       </p>
     </div>
-    {description && (
-      <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-3 leading-relaxed">
-        {description}
-      </p>
-    )}
-    {tech.length > 0 && (
-      <div class="flex flex-wrap gap-1.5 mt-4">
-        {tech.map((t) => (
-          <span
-            data-tech={t}
-            class="tech-pill px-3 py-1 text-xs rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 transition-colors cursor-default"
-          >
-            {t}
-          </span>
-        ))}
-      </div>
-    )}
+    {
+      description && (
+        <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-3 leading-relaxed">
+          {description}
+        </p>
+      )
+    }
+    {
+      tech.length > 0 && (
+        <div class="flex flex-wrap gap-1.5 mt-4">
+          {tech.map((t) => (
+            <span
+              data-tech={t}
+              class="tech-pill px-3 py-1 text-xs rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 transition-colors cursor-default"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      )
+    }
   </div>
 </article>

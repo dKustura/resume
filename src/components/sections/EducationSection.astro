@@ -9,17 +9,28 @@ interface Props {
 }
 const { items } = Astro.props;
 ---
+
 <div class="px-8 py-8 space-y-4">
-  <p class="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+  <p
+    class="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+  >
     Education
   </p>
   <div class="space-y-5">
-    {items.map((item) => (
-      <div>
-        <p class="text-sm font-medium text-neutral-800 dark:text-neutral-200">{item.degree}</p>
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">{item.school}</p>
-        <p class="text-xs text-neutral-400 dark:text-neutral-500 tabular-nums mt-0.5">{item.period}</p>
-      </div>
-    ))}
+    {
+      items.map((item) => (
+        <div>
+          <p class="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+            {item.degree}
+          </p>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+            {item.school}
+          </p>
+          <p class="text-xs text-neutral-400 dark:text-neutral-500 tabular-nums mt-0.5">
+            {item.period}
+          </p>
+        </div>
+      ))
+    }
   </div>
 </div>

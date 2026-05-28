@@ -45,7 +45,15 @@ export const experience: ExperienceEntry[] = [
     companyUrl: 'https://www.infobip.com',
     iconType: 'communications',
     period: 'Feb 2021 – Jun 2022',
-    tech: ['React', 'Redux', 'TypeScript', 'Webpack', '.NET Core', 'MS SQL Server', 'Docker'],
+    tech: [
+      'React',
+      'Redux',
+      'TypeScript',
+      'Webpack',
+      '.NET Core',
+      'MS SQL Server',
+      'Docker',
+    ],
     bullets: [
       "Built and maintained internal tools powering the company's SMS service management at a CPaaS company operating at significant scale.",
       'Projects spanned routing, billing, analytics, and internal user configuration across one of the core product lines.',
@@ -57,7 +65,15 @@ export const experience: ExperienceEntry[] = [
     companyUrl: 'https://www.avl.com/en',
     iconType: 'automotive',
     period: 'Mar 2019 – Jan 2021',
-    tech: ['React', 'Redux', 'TypeScript', 'Cypress', 'Material UI', '.NET Core', 'MySQL'],
+    tech: [
+      'React',
+      'Redux',
+      'TypeScript',
+      'Cypress',
+      'Material UI',
+      '.NET Core',
+      'MySQL',
+    ],
     bullets: [
       'Built web applications delivered to automotive OEMs including Ford and Daimler/Mercedes-Benz.',
       'Projects included vehicle and parts management systems, manufacturing pipeline tools, and related internal platforms.',

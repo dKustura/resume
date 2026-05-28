@@ -67,9 +67,9 @@ Website for an event planning-company, a personal bookshelf website etc.
 Nutrition tracking and plan management app for nutritionists and their clients.
 `React` `Redux` `TypeScript` `NestJS` `Prisma` `PostgreSQL`
 
-### Airsoft Zadar `2020 – 2021`
+### Local recreational club `2020 – 2021`
 
-Presentation and CMS web app for a local sports recreation club.
+Presentation and CMS web app for a local recreational club.
 `React` `Redux` `TypeScript` `Firebase` `Firestore` `Google Cloud Functions`
 
 ### Rudimentary social network `Sep 2016 – Jan 2017`

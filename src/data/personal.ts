@@ -7,5 +7,10 @@ export const personal: Personal = {
   linkedin: 'https://linkedin.com/in/denis-kustura',
   github: 'https://github.com/dKustura',
   avatar: '/avatar.jpeg',
-  interests: ['Running', 'Road bikes', 'Hiking', { label: 'Books & Audiobooks', url: 'https://whatimread.ing' }],
+  interests: [
+    'Running',
+    'Road bikes',
+    'Hiking',
+    { label: 'Books & Audiobooks', url: 'https://whatimread.ing' },
+  ],
 };

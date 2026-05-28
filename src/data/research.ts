@@ -8,6 +8,7 @@ export const research: ResearchEntry[] = [
     period: 'Mar – Jul 2018',
     link: 'https://www.fer.unizg.hr/_download/repository/TAR-2018-ProjectReports.pdf',
     tech: ['Python', 'NLP'],
-    subtitle: 'Scientific paper — team of 3 (Andrija Perušić, Ivan Matak, Denis Kustura)',
+    subtitle:
+      'Scientific paper — team of 3 (Andrija Perušić, Ivan Matak, Denis Kustura)',
   },
 ];
