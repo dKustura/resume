@@ -13,7 +13,10 @@ export const techGroups: TechGroup[] = [
       { name: 'SCSS', icon: 'sass' },
       { name: 'Astro', icon: 'astro' },
       { name: 'Vite', icon: 'vite' },
+      { name: 'Webpack', icon: 'webpack' },
       { name: 'D3.js', icon: 'd3dotjs' },
+      { name: 'Storybook', icon: 'storybook' },
+      { name: 'CKEditor', icon: null },
     ],
   },
   {
@@ -21,6 +24,7 @@ export const techGroups: TechGroup[] = [
     items: [
       { name: 'JavaScript', icon: 'javascript' },
       { name: 'TypeScript', icon: 'typescript' },
+      { name: 'HTML/CSS', icon: 'html5' },
       { name: 'Python', icon: 'python' },
       { name: 'C#', icon: 'csharp' },
     ],
@@ -32,6 +36,8 @@ export const techGroups: TechGroup[] = [
       { name: 'NestJS', icon: 'nestjs' },
       { name: 'Express.js', icon: 'express', darkInvert: true },
       { name: 'GraphQL', icon: 'graphql' },
+      { name: 'Apollo', icon: 'apollographql', darkInvert: true },
+      { name: 'REST APIs', icon: null },
       { name: '.NET', icon: 'dotnet' },
     ],
   },
@@ -60,7 +66,8 @@ export const techGroups: TechGroup[] = [
       { name: 'Git', icon: 'git' },
       { name: 'Docker', icon: 'docker' },
       { name: 'Google Cloud', icon: 'googlecloud' },
-      { name: 'Claude', icon: 'anthropic', darkInvert: true },
+      { name: 'Cloudflare', icon: 'cloudflare' },
+      { name: 'Claude Code', icon: 'anthropic', darkInvert: true },
     ],
   },
 ];

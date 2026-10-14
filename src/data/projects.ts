@@ -35,11 +35,4 @@ export const projects: ProjectEntry[] = [
       'Google Cloud Functions',
     ],
   },
-  {
-    title: 'Rudimentary social network',
-    description:
-      'University project — a basic social network with real-time features.',
-    period: 'Sep 2016 – Jan 2017',
-    tech: ['Node.js', 'Express.js', 'Socket.io', 'MongoDB', 'Heroku'],
-  },
 ];

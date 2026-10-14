@@ -1,0 +1,24 @@
+---
+import { personal } from '../../data';
+---
+
+<section
+  id="summary"
+  class="px-8 py-8 border-b border-neutral-200 dark:border-neutral-800"
+>
+  <p
+    class="text-xs font-medium uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-1.5"
+  >
+    About
+  </p>
+  <h2
+    class="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100"
+  >
+    Summary
+  </h2>
+  <p
+    class="mt-4 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-prose"
+  >
+    {personal.summary}
+  </p>
+</section>

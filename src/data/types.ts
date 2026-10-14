@@ -54,6 +54,7 @@ export interface TechGroup {
 export interface Personal {
   name: string;
   title: string;
+  summary: string;
   email: string;
   linkedin: string;
   github: string;

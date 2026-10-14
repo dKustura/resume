@@ -2,7 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import { Nav } from '../components/ui';
 import { ExperienceItem, ProjectItem, ResearchItem } from '../components/items';
-import { ProfileSection, EducationSection, TechGrid, Interests } from '../components/sections';
+import {
+  ProfileSection,
+  SummarySection,
+  EducationSection,
+  TechGrid,
+  Interests,
+} from '../components/sections';
 import { experience, projects, research, education, techGroups } from '../data';
 
 ---
@@ -33,6 +39,9 @@ import { experience, projects, research, education, techGroups } from '../data';
       <div
         class="order-2 md:col-start-1 md:row-start-1 md:border-r border-neutral-200 dark:border-neutral-800"
       >
+        <!-- Summary -->
+        <SummarySection />
+
         <!-- Work Experience -->
         <section
           id="experience"
