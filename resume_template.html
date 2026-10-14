@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Denis Kustura — Resume</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;800&display=swap">
 <style>
   @page { size: A4; margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,8 +24,8 @@
   }
 
   html, body {
-    font-family: "Helvetica", "Arial", sans-serif;
-    font-size: 8.4pt;
+    font-family: "Inter", "Helvetica", "Arial", sans-serif;
+    font-size: 8.2pt;
     line-height: 1.35;
     color: var(--text);
     background: var(--paper);
@@ -36,7 +37,7 @@
   .hero {
     background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 100%);
     color: #ffffff;
-    padding: 9mm 14mm 8mm 14mm;
+    padding: 7mm 14mm 6mm 14mm;
     display: flex;
     gap: 18px;
     align-items: center;
@@ -67,7 +68,7 @@
   .hero-role {
     font-size: 8.4pt;
     color: var(--soft);
-    letter-spacing: 4px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: 600;
     margin-bottom: 9px;
@@ -89,7 +90,7 @@
   }
 
   /* ===== Body ===== */
-  .body { padding: 6mm 14mm 6mm 14mm; }
+  .body { padding: 5mm 14mm 4mm 14mm; }
 
   .section { margin-bottom: 6px; }
 
@@ -98,7 +99,7 @@
     font-weight: 800;
     color: var(--primary-deep);
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
     margin-bottom: 6px;
     display: flex;
     align-items: center;
@@ -118,12 +119,15 @@
     background: var(--rule);
   }
 
+  .summary p { font-size: 8.3pt; line-height: 1.45; }
+  .summary b { color: var(--ink); font-weight: 600; }
+
   /* Experience entries */
   .entry {
     display: grid;
     grid-template-columns: 78px 1fr;
     gap: 12px;
-    margin-bottom: 5px;
+    margin-bottom: 11px;
     page-break-inside: avoid;
   }
   .entry-date {
@@ -131,13 +135,23 @@
     color: var(--primary);
     font-weight: 700;
     letter-spacing: 0.4px;
-    padding-top: 2px;
+    padding-top: 3px;
+  }
+  .entry-dur {
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-top: 2px;
   }
   .role {
-    font-size: 9.4pt;
+    font-size: 10.2pt;
     font-weight: 700;
     color: var(--ink);
     line-height: 1.15;
+    background: #ecfdf5;
+    border-left: 3px solid var(--primary);
+    padding: 2px 8px;
+    margin: 0 0 2px -11px;
   }
   .role .sub { font-weight: 400; color: var(--muted); font-size: 8pt; }
   .role a { color: inherit; text-decoration: none; }
@@ -147,9 +161,9 @@
   }
   .org a { color: inherit; text-decoration: none; }
   .stack {
-    font-size: 7.8pt;
+    font-size: 7.6pt;
     color: var(--muted);
-    margin: 1px 0 2px 0;
+    margin: 0 0 2px 0;
   }
   .stack b { color: var(--ink); font-weight: 600; }
   .bullets {
@@ -159,14 +173,14 @@
     line-height: 1.32;
   }
   .bullets li {
-    position: relative;
     padding-left: 11px;
     margin-bottom: 1px;
   }
   .bullets li::before {
     content: "";
-    position: absolute;
-    left: 0; top: 5.5px;
+    display: inline-block;
+    vertical-align: 1.5px;
+    margin: 0 7px 0 -11px;
     width: 4px; height: 4px;
     background: var(--primary);
     border-radius: 50%;
@@ -221,14 +235,14 @@
     color: var(--ink);
   }
   .edu b { font-weight: 700; }
-  .edu .meta { color: var(--muted); font-size: 7.8pt; }
+  .edu .meta { color: var(--muted); font-size: 7.8pt; white-space: nowrap; }
   .edu .dt { color: var(--primary); font-weight: 600; font-size: 7.4pt; letter-spacing: 0.3px; }
 
   /* Technologies */
   .tech-grid {
     display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 4px 14px;
+    grid-template-columns: 150px 1fr;
+    gap: 2px 14px;
     align-items: baseline;
   }
   .tech-lbl {
@@ -236,7 +250,8 @@
     color: var(--primary-deep);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.6px;
+    white-space: nowrap;
   }
   .tech-vals {
     font-size: 8pt;
@@ -256,6 +271,7 @@
     margin: 0 4px;
     font-weight: 700;
   }
+  .body a { color: inherit; text-decoration: none; }
 </style>
 </head>
 <body>
@@ -269,14 +285,21 @@
       <div class="hero-name"><span>Denis</span> Kustura</div>
       <div class="hero-role">Senior Software Engineer</div>
       <div class="hero-contact">
-        <span><span class="sep">·</span>denis@codequst.com</span>
-        <span><span class="sep">·</span>linkedin.com/in/denis-kustura</span>
-        <span><span class="sep">·</span>github.com/dKustura</span>
+        <span><span class="sep">·</span><a href="mailto:denis@codequst.com">denis@codequst.com</a></span>
+        <span><span class="sep">·</span><a href="https://linkedin.com/in/denis-kustura">linkedin.com/in/denis-kustura</a></span>
+        <span><span class="sep">·</span><a href="https://github.com/dKustura">github.com/dKustura</a></span>
+        <span><span class="sep">·</span><a href="https://kustura.dev">kustura.dev</a></span>
       </div>
     </div>
   </header>
 
   <div class="body">
+
+    <!-- SUMMARY -->
+    <div class="section summary">
+      <div class="section-h">Summary</div>
+      <p>Senior software engineer with 7+ years building complex web applications in <b>React</b> and <b>TypeScript</b>, with full-stack experience in Node.js and .NET. Currently building an <b>AI-enhanced no-code platform</b> — logic editors, real-time updates and CKEditor-based rich-text authoring — and working AI-first day to day with Claude Code.</p>
+    </div>
 
     <!-- EXPERIENCE -->
     <div class="section">
@@ -285,8 +308,8 @@
       <div class="entry">
         <div class="entry-date">Sep 2022<br>Present</div>
         <div>
-          <div class="role">Senior Frontend Engineer <span class="org">— Neota Logic</span></div>
-          <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · CKEditor</div>
+          <div class="role">Senior Frontend Engineer <span class="org">— <a href="https://neota.com">Neota Logic</a></span></div>
+          <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · Apollo · Tailwind CSS · CKEditor · Storybook</div>
           <ul class="bullets">
             <li>No-code platform letting lawyers, accountants, compliance officers and consultants build web applications.</li>
             <li>Develop and maintain core front-end functionality — <b>theming, building blocks, logic editors, authoring utilities, real-time updates and validation</b>.</li>
@@ -298,8 +321,8 @@
       <div class="entry">
         <div class="entry-date">Jul 2022<br>Present</div>
         <div>
-          <div class="role">Freelance Software Engineer <span class="org">— Codequst</span></div>
-          <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · .NET · Node.js · NestJS</div>
+          <div class="role">Software Engineer <span class="org">— <a href="https://codequst.com">Codequst</a></span> <span class="sub">(freelance)</span></div>
+          <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · .NET · Node.js · NestJS · Storybook · Cloudflare</div>
           <ul class="bullets"><li>Building a real-time IDE for a no-code platform on the web, among other client projects.</li></ul>
         </div>
       </div>
@@ -307,8 +330,8 @@
       <div class="entry">
         <div class="entry-date">Sep 2023<br>Feb 2024</div>
         <div>
-          <div class="role">Senior Frontend Engineer <span class="org">— heyPatient</span> <span class="sub">(part-time)</span></div>
-          <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>Next.js</b> · GraphQL · Sentry</div>
+          <div class="role">Senior Frontend Engineer <span class="org">— <a href="https://en.heypatient.com">heyPatient</a></span> <span class="sub">(part-time)</span></div>
+          <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>Next.js</b> · GraphQL · Sentry · Storybook</div>
           <ul class="bullets">
             <li>Digital health platform used by hospitals to streamline patient data management and appointment workflows.</li>
             <li>Led the frontend implementation of a Medical ID OCR scanning feature deployed on specialized hospital terminals — dedicated stations that let staff digitize patient ID documents in seconds.</li>
@@ -320,8 +343,8 @@
       <div class="entry">
         <div class="entry-date">Feb 2021<br>Jun 2022</div>
         <div>
-          <div class="role">Fullstack Software Engineer <span class="org">— Infobip</span></div>
-          <div class="stack"><b>Frontend:</b> React · Redux · TypeScript · Webpack &nbsp; <b>Backend:</b> .NET Core · MS SQL · Docker</div>
+          <div class="role">Fullstack Software Engineer <span class="org">— <a href="https://www.infobip.com">Infobip</a></span></div>
+          <div class="stack"><b>React</b> · <b>Redux</b> · <b>TypeScript</b> · Webpack · Storybook · .NET Core · MS SQL Server · Docker</div>
           <ul class="bullets"><li>Built internal tools powering the company's SMS service management at a CPaaS company operating at significant scale — routing, billing, analytics, and user configuration across a core product line.</li></ul>
         </div>
       </div>
@@ -329,8 +352,8 @@
       <div class="entry">
         <div class="entry-date">Mar 2019<br>Jan 2021</div>
         <div>
-          <div class="role">Fullstack Software Engineer <span class="org">— AVL</span></div>
-          <div class="stack"><b>Frontend:</b> React · Redux · TypeScript · Cypress · Material UI &nbsp; <b>Backend:</b> .NET Core · MySQL</div>
+          <div class="role">Fullstack Software Engineer <span class="org">— <a href="https://www.avl.com/en">AVL</a></span></div>
+          <div class="stack"><b>React</b> · <b>Redux</b> · <b>TypeScript</b> · Cypress · Material UI · Storybook · .NET Core · MySQL</div>
           <ul class="bullets"><li>Web applications for automotive OEMs including Ford and Daimler / Mercedes-Benz — vehicle and parts-management systems, manufacturing pipeline tools, and related internal platforms.</li></ul>
         </div>
       </div>
@@ -338,8 +361,8 @@
       <div class="entry">
         <div class="entry-date">Jul 2017<br>Dec 2017</div>
         <div>
-          <div class="role">Fullstack Software Engineer <span class="org">— Ericsson Nikola Tesla</span></div>
-          <div class="stack"><b>Frontend:</b> JavaScript · D3.js &nbsp; <b>Backend:</b> Node.js</div>
+          <div class="role">Fullstack Software Engineer <span class="org">— <a href="https://ericssonnikolatesla.com">Ericsson Nikola Tesla</a></span></div>
+          <div class="stack"><b>JavaScript</b> · <b>D3.js</b> · Node.js · Storybook</div>
         </div>
       </div>
     </div>
@@ -351,19 +374,8 @@
 
         <div class="proj">
           <div class="proj-head">
-            <div class="proj-name">Codequst</div>
-            <div class="proj-date">2022 — Present</div>
-          </div>
-          <div class="proj-desc">Own software agency website.</div>
-          <div class="proj-stack">
-            <span class="stk-tag">Next.js</span><span class="stk-tag">TypeScript</span><span class="stk-tag">Tailwind</span>
-          </div>
-        </div>
-
-        <div class="proj">
-          <div class="proj-head">
             <div class="proj-name">Nutripoint</div>
-            <div class="proj-date">2021 — 2022</div>
+            <div class="proj-date">2021 – 2022</div>
           </div>
           <div class="proj-desc">Nutrition tracking &amp; plan management app for nutritionists and clients.</div>
           <div class="proj-stack">
@@ -374,7 +386,7 @@
         <div class="proj">
           <div class="proj-head">
             <div class="proj-name">Local recreational club</div>
-            <div class="proj-date">2020 — 2021</div>
+            <div class="proj-date">2020 – 2021</div>
           </div>
           <div class="proj-desc">Presentation &amp; CMS web app for a local recreational club.</div>
           <div class="proj-stack">
@@ -382,25 +394,15 @@
           </div>
         </div>
 
-        <div class="proj">
-          <div class="proj-head">
-            <div class="proj-name">Various static sites</div>
-            <div class="proj-date">2021 — Present</div>
+        <div class="section" style="margin:8px 0 0">
+          <div class="section-h">Education</div>
+          <div class="edu">
+            <b>Master of Science in Computing</b> · <span class="meta">University of Zagreb, FER</span><br>
+            <span class="dt">Sep 2017 – Jul 2019</span>
           </div>
-          <div class="proj-desc">Site for an event-planning company, a personal bookshelf site etc.</div>
-          <div class="proj-stack">
-            <span class="stk-tag">Astro</span>
-          </div>
-        </div>
-
-        <div class="proj">
-          <div class="proj-head">
-            <div class="proj-name">Rudimentary social network</div>
-            <div class="proj-date">2016 — 2017</div>
-          </div>
-          <div class="proj-desc">University project — basic social network with real-time features.</div>
-          <div class="proj-stack">
-            <span class="stk-tag">Node.js</span><span class="stk-tag">Express</span><span class="stk-tag">Socket.io</span><span class="stk-tag">MongoDB</span>
+          <div class="edu">
+            <b>Bachelor of Science in Computing</b> · <span class="meta">University of Zagreb, FER</span><br>
+            <span class="dt">Sep 2014 – Jul 2017</span>
           </div>
         </div>
       </div>
@@ -410,8 +412,8 @@
           <div class="section-h">Research</div>
           <div class="proj" style="margin-bottom:0">
             <div class="proj-head">
-              <div class="proj-name">Early Depression Detection from Language Use</div>
-              <div class="proj-date">Mar — Jul 2018</div>
+              <div class="proj-name"><a href="https://www.fer.unizg.hr/_download/repository/TAR-2018-ProjectReports.pdf">Early Depression Detection from Language Use</a></div>
+              <div class="proj-date">Mar – Jul 2018</div>
             </div>
             <div class="proj-desc"><i>Scientific paper · team of 3 (Perušić, Matak, Kustura).</i> NLP pipeline for early depression detection from text, based on collaborative filtering and language analysis. Published as part of the Text Analysis &amp; Retrieval course at the University of Zagreb.</div>
             <div class="proj-stack">
@@ -420,22 +422,10 @@
           </div>
         </div>
 
-        <div class="section" style="margin-bottom:8px">
-          <div class="section-h">Education</div>
-          <div class="edu">
-            <b>Master of Science in Computing</b> · <span class="meta">University of Zagreb, FER</span><br>
-            <span class="dt">Sep 2017 — Jul 2019</span>
-          </div>
-          <div class="edu">
-            <b>Bachelor of Science in Computing</b> · <span class="meta">University of Zagreb, FER</span><br>
-            <span class="dt">Sep 2014 — Jul 2017</span>
-          </div>
-        </div>
-
         <div class="section" style="margin-bottom:0">
           <div class="section-h">Interests</div>
           <div style="font-size:8.2pt; color:var(--text); line-height:1.5">
-            Running · Road bikes · Hiking · Books &amp; audiobooks
+            Running · Road bikes · Hiking · <a href="https://whatimread.ing">Books &amp; audiobooks</a>
           </div>
         </div>
       </div>
@@ -446,21 +436,43 @@
       <div class="section-h">Technologies</div>
       <div class="tech-grid">
         <div class="tech-lbl">Frontend</div>
-        <div class="tech-vals"><b>React</b> · Redux · <b>Next.js</b> · Tailwind CSS · Material UI · shadcn/ui · SCSS · Astro · Vite · D3.js</div>
+        <div class="tech-vals"><b>React</b> · Redux · <b>Next.js</b> · Tailwind CSS · Material UI · shadcn/ui · SCSS · Astro · Vite · D3.js · Storybook</div>
         <div class="tech-lbl">Languages</div>
-        <div class="tech-vals"><b>JavaScript</b> · <b>TypeScript</b> · Python · C#</div>
+        <div class="tech-vals"><b>JavaScript</b> · <b>TypeScript</b> · HTML/CSS · Python · C#</div>
         <div class="tech-lbl">Backend &amp; API</div>
-        <div class="tech-vals"><b>Node.js</b> · NestJS · Express.js · <b>GraphQL</b> · .NET</div>
+        <div class="tech-vals"><b>Node.js</b> · NestJS · Express.js · <b>GraphQL</b> · Apollo · REST APIs · .NET</div>
         <div class="tech-lbl">Databases</div>
         <div class="tech-vals">PostgreSQL · MySQL · MS SQL Server · MongoDB · Prisma · Firebase</div>
         <div class="tech-lbl">Testing &amp; Monitoring</div>
         <div class="tech-vals">Cypress · Playwright · Sentry</div>
         <div class="tech-lbl">Tools &amp; Infra</div>
-        <div class="tech-vals">Git · Docker · Google Cloud · Claude</div>
+        <div class="tech-vals">Git · Docker · Google Cloud · Claude Code</div>
       </div>
     </div>
 
   </div>
 </div>
+<script>
+  // Append a LinkedIn-style duration ("1 yr 5 mos") under each experience date range.
+  // Both end months count, and "Present" means the month the PDF is built.
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const toIndex = (text) => {
+    if (text.trim() === 'Present') {
+      const now = new Date();
+      return now.getFullYear() * 12 + now.getMonth();
+    }
+    const [month, year] = text.trim().split(' ');
+    return Number(year) * 12 + MONTHS.indexOf(month);
+  };
+  const plural = (n, unit) => `${n} ${unit}${n === 1 ? '' : 's'}`;
+  for (const el of document.querySelectorAll('.entry-date')) {
+    const [from, to] = el.innerHTML.split('<br>');
+    const total = toIndex(to) - toIndex(from) + 1;
+    const years = Math.floor(total / 12);
+    const months = total % 12;
+    const parts = [years && plural(years, 'yr'), months && plural(months, 'mo')].filter(Boolean);
+    el.insertAdjacentHTML('beforeend', `<div class="entry-dur">${parts.join(' ')}</div>`);
+  }
+</script>
 </body>
 </html>
