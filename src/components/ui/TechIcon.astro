@@ -1,0 +1,30 @@
+---
+import * as simpleIcons from 'simple-icons';
+import type { SimpleIcon } from 'simple-icons';
+
+interface Props {
+  slug: string;
+  darkInvert?: boolean;
+  class?: string;
+}
+
+const { slug, darkInvert, class: className = 'w-3 h-3' } = Astro.props;
+
+// Inlined at build time — "nextdotjs" → siNextdotjs
+const exportName = `si${slug[0].toUpperCase()}${slug.slice(1)}`;
+const icon = (simpleIcons as Record<string, SimpleIcon | undefined>)[exportName];
+---
+
+{
+  icon && (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill={`#${icon.hex}`}
+      aria-hidden="true"
+      class:list={['shrink-0', className, { 'dark:invert': darkInvert }]}
+    >
+      <path d={icon.path} />
+    </svg>
+  )
+}

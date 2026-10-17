@@ -48,7 +48,7 @@ html.dark .tech-pill.active {
   border-color: rgb(16 185 129 / 0.5);      /* emerald-500/50 */
 }
 
-/* Safelist: dark:invert (used dynamically in index.astro techGroups) */
+/* Safelist: dark:invert (applied via class:list in TechIcon.astro) */
 @source inline("dark:invert");
 
 /* Pop-in animation for download button */

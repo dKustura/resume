@@ -1,5 +1,6 @@
 ---
 import { techGroups, type TechItem } from '../../data';
+import TechIcon from './TechIcon.astro';
 
 interface Props {
   tech: string[];
@@ -25,13 +26,7 @@ const techByName = new Map<string, TechItem>(
             class="tech-pill inline-flex items-center gap-1.5 px-2 py-0.5 text-xs rounded-md bg-neutral-100/80 dark:bg-neutral-800/60 text-neutral-600 dark:text-neutral-400 border border-transparent transition-colors cursor-default"
           >
             {item?.icon && (
-              <img
-                src={`https://cdn.simpleicons.org/${item.icon}`}
-                class:list={['w-3 h-3', { 'dark:invert': item.darkInvert }]}
-                alt=""
-                loading="lazy"
-                onerror="this.style.display='none'"
-              />
+              <TechIcon slug={item.icon} darkInvert={item.darkInvert} />
             )}
             {t}
           </li>

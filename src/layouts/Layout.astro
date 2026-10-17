@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { personal, experience } from '../data';
 
 interface Props {
   title?: string;
@@ -11,7 +12,24 @@ const {
   description = 'Senior Software Engineer specializing in Full-stack web development.',
 } = Astro.props;
 
-const ogUrl = Astro.url.href;
+const ogUrl = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/og-image.png', Astro.site).href;
+
+// Structured data so search engines can show a person card
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: personal.name,
+  jobTitle: personal.title,
+  url: Astro.site?.href,
+  image: new URL(personal.avatar, Astro.site).href,
+  sameAs: [personal.linkedin, personal.github],
+  worksFor: {
+    '@type': 'Organization',
+    name: experience[0].company,
+    url: experience[0].companyUrl,
+  },
+};
 ---
 
 <!doctype html>
@@ -27,17 +45,29 @@ const ogUrl = Astro.url.href;
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Denis Kustura" />
+    <link rel="canonical" href={ogUrl} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={ogUrl} />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.simpleicons.org" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
