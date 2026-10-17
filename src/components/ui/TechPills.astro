@@ -1,0 +1,42 @@
+---
+import { techGroups, type TechItem } from '../../data';
+
+interface Props {
+  tech: string[];
+  class?: string;
+}
+
+const { tech, class: className } = Astro.props;
+
+// Reuse the sidebar icons so entry pills match the Technologies grid
+const techByName = new Map<string, TechItem>(
+  techGroups.flatMap((group) => group.items).map((item) => [item.name, item]),
+);
+---
+
+{
+  tech.length > 0 && (
+    <ul class:list={['flex flex-wrap gap-1.5', className]}>
+      {tech.map((t) => {
+        const item = techByName.get(t);
+        return (
+          <li
+            data-tech={t}
+            class="tech-pill inline-flex items-center gap-1.5 px-2 py-0.5 text-xs rounded-md bg-neutral-100/80 dark:bg-neutral-800/60 text-neutral-600 dark:text-neutral-400 border border-transparent transition-colors cursor-default"
+          >
+            {item?.icon && (
+              <img
+                src={`https://cdn.simpleicons.org/${item.icon}`}
+                class:list={['w-3 h-3', { 'dark:invert': item.darkInvert }]}
+                alt=""
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+            )}
+            {t}
+          </li>
+        );
+      })}
+    </ul>
+  )
+}

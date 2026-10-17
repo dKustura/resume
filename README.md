@@ -8,25 +8,32 @@
 
 ## Summary
 
-Senior software engineer with 7+ years building complex web applications in React and TypeScript, with full-stack experience in Node.js and .NET. Currently building an AI-enhanced no-code platform — logic editors, real-time updates and CKEditor-based rich-text authoring — and working AI-first day to day with Claude Code.
+Senior software engineer with 7+ years building complex web applications in React and TypeScript, with full-stack experience in Scala, Node.js and .NET. Currently building an AI-enhanced no-code platform — logic editors, real-time updates and CKEditor-based rich-text authoring — and working AI-first day to day with Claude Code.
 
 ---
 
 ## Work Experience
 
+### Senior Fullstack Engineer — [Neota Logic](https://neota.com)
+
+`Sep 2026 – Present` · React · TypeScript · GraphQL · Apollo · Tailwind CSS · CKEditor · Storybook · Scala · Play Framework · PostgreSQL
+
+- Moved into a full-stack role, building backend services in Scala and Play Framework on PostgreSQL while continuing to own core front-end functionality of the no-code platform.
+
 ### Senior Frontend Engineer — [Neota Logic](https://neota.com)
 
-`Sep 2022 – Present` · React · TypeScript · GraphQL · Apollo · Tailwind CSS · CKEditor · Storybook
+`Sep 2022 – Aug 2026` · React · TypeScript · GraphQL · Apollo · Tailwind CSS · CKEditor · Storybook
 
 - No-code platform that lets lawyers, accountants, compliance officers, consultants, and other non-programmers build web applications.
 - Development and maintenance of the core front-end functionality — theming, building blocks, logic editors, authoring utilities, real-time updates, and validation.
 - Development of advanced rich text editing experiences on CKEditor, integrating custom interactive and dynamic components that connect document content to underlying business logic.
 
-### Senior Software Engineer — [Codequst](https://codequst.com) _(Freelance)_
+### Founder — [Codequst](https://codequst.com)
 
 `Jul 2022 – Present` · React · TypeScript · GraphQL · .NET · Node.js · NestJS · Storybook · Cloudflare
 
-- Building a real-time IDE for a no-code platform on the web, among other client projects.
+- Running my own software agency, delivering client projects including a real-time, web-based IDE for a no-code platform.
+- Also working on launching a product of my own.
 
 ### Senior Frontend Engineer — [heyPatient](https://en.heypatient.com) _(Part-time)_
 
@@ -103,9 +110,9 @@ NLP pipeline for early depression detection from text, based on collaborative fi
 
 **Frontend** · React · Redux · Next.js · Tailwind CSS · Material UI · shadcn/ui · SCSS · Astro · Vite · Webpack · D3.js · Storybook · CKEditor
 
-**Languages** · JavaScript · TypeScript · HTML/CSS · Python · C#
+**Languages** · JavaScript · TypeScript · HTML/CSS · Python · C# · Scala
 
-**Backend & API** · Node.js · NestJS · Express.js · GraphQL · Apollo · REST APIs · .NET
+**Backend & API** · Node.js · NestJS · Express.js · GraphQL · Apollo · REST APIs · .NET · Play Framework
 
 **Databases** · PostgreSQL · MySQL · MS SQL Server · MongoDB · Prisma · Firebase
 

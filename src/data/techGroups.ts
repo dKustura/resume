@@ -27,6 +27,7 @@ export const techGroups: TechGroup[] = [
       { name: 'HTML/CSS', icon: 'html5' },
       { name: 'Python', icon: 'python' },
       { name: 'C#', icon: 'csharp' },
+      { name: 'Scala', icon: 'scala' },
     ],
   },
   {
@@ -39,6 +40,7 @@ export const techGroups: TechGroup[] = [
       { name: 'Apollo', icon: 'apollographql', darkInvert: true },
       { name: 'REST APIs', icon: null },
       { name: '.NET', icon: 'dotnet' },
+      { name: 'Play Framework', icon: null },
     ],
   },
   {

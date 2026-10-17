@@ -160,6 +160,27 @@
     font-weight: 600;
   }
   .org a { color: inherit; text-decoration: none; }
+  /* Multiple roles at one company */
+  .subrole {
+    margin-top: 4px;
+    padding-left: 8px;
+    border-left: 1px solid var(--rule);
+  }
+  .subrole-h {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .subrole-date {
+    font-size: 7.4pt;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 0.4px;
+  }
   .stack {
     font-size: 7.6pt;
     color: var(--muted);
@@ -298,7 +319,7 @@
     <!-- SUMMARY -->
     <div class="section summary">
       <div class="section-h">Summary</div>
-      <p>Senior software engineer with 7+ years building complex web applications in <b>React</b> and <b>TypeScript</b>, with full-stack experience in Node.js and .NET. Currently building an <b>AI-enhanced no-code platform</b> — logic editors, real-time updates and CKEditor-based rich-text authoring — and working AI-first day to day with Claude Code.</p>
+      <p>Senior software engineer with 7+ years building complex web applications in <b>React</b> and <b>TypeScript</b>, with full-stack experience in Scala, Node.js and .NET. Currently building an <b>AI-enhanced no-code platform</b> — logic editors, real-time updates and CKEditor-based rich-text authoring — and working AI-first day to day with Claude Code.</p>
     </div>
 
     <!-- EXPERIENCE -->
@@ -308,22 +329,33 @@
       <div class="entry">
         <div class="entry-date">Sep 2022<br>Present</div>
         <div>
-          <div class="role">Senior Frontend Engineer <span class="org">— <a href="https://neota.com">Neota Logic</a></span></div>
-          <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · Apollo · Tailwind CSS · CKEditor · Storybook</div>
-          <ul class="bullets">
-            <li>No-code platform letting lawyers, accountants, compliance officers and consultants build web applications.</li>
-            <li>Develop and maintain core front-end functionality — <b>theming, building blocks, logic editors, authoring utilities, real-time updates and validation</b>.</li>
-            <li>Advanced rich-text editing on CKEditor: custom interactive components connecting document content to underlying business logic.</li>
-          </ul>
+          <div class="role"><span class="org"><a href="https://neota.com">Neota Logic</a></span></div>
+          <div class="subrole">
+            <div class="subrole-h">Senior Fullstack Engineer <span class="subrole-date">Sep 2026 – Present</span></div>
+            <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · Apollo · Tailwind CSS · CKEditor · Storybook · <b>Scala</b> · <b>Play Framework</b> · PostgreSQL</div>
+            <ul class="bullets"><li>Moved into a full-stack role, building backend services in Scala and Play Framework on PostgreSQL while continuing to own core front-end functionality of the no-code platform.</li></ul>
+          </div>
+          <div class="subrole">
+            <div class="subrole-h">Senior Frontend Engineer <span class="subrole-date">Sep 2022 – Aug 2026</span></div>
+            <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · Apollo · Tailwind CSS · CKEditor · Storybook</div>
+            <ul class="bullets">
+              <li>No-code platform letting lawyers, accountants, compliance officers and consultants build web applications.</li>
+              <li>Develop and maintain core front-end functionality — <b>theming, building blocks, logic editors, authoring utilities, real-time updates and validation</b>.</li>
+              <li>Advanced rich-text editing on CKEditor: custom interactive components connecting document content to underlying business logic.</li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <div class="entry">
         <div class="entry-date">Jul 2022<br>Present</div>
         <div>
-          <div class="role">Senior Software Engineer <span class="org">— <a href="https://codequst.com">Codequst</a></span> <span class="sub">(freelance)</span></div>
+          <div class="role">Founder <span class="org">— <a href="https://codequst.com">Codequst</a></span></div>
           <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · .NET · Node.js · NestJS · Storybook · Cloudflare</div>
-          <ul class="bullets"><li>Building a real-time IDE for a no-code platform on the web, among other client projects.</li></ul>
+          <ul class="bullets">
+            <li>Running my own software agency, delivering client projects including a real-time, web-based IDE for a no-code platform.</li>
+            <li>Also working on launching a product of my own.</li>
+          </ul>
         </div>
       </div>
 
@@ -438,9 +470,9 @@
         <div class="tech-lbl">Frontend</div>
         <div class="tech-vals"><b>React</b> · Redux · <b>Next.js</b> · Tailwind CSS · Material UI · shadcn/ui · SCSS · Astro · Vite · D3.js · Storybook</div>
         <div class="tech-lbl">Languages</div>
-        <div class="tech-vals"><b>JavaScript</b> · <b>TypeScript</b> · HTML/CSS · Python · C#</div>
+        <div class="tech-vals"><b>JavaScript</b> · <b>TypeScript</b> · HTML/CSS · Python · C# · Scala</div>
         <div class="tech-lbl">Backend &amp; API</div>
-        <div class="tech-vals"><b>Node.js</b> · NestJS · Express.js · <b>GraphQL</b> · Apollo · REST APIs · .NET</div>
+        <div class="tech-vals"><b>Node.js</b> · NestJS · Express.js · <b>GraphQL</b> · Apollo · REST APIs · .NET · Play Framework</div>
         <div class="tech-lbl">Databases</div>
         <div class="tech-vals">PostgreSQL · MySQL · MS SQL Server · MongoDB · Prisma · Firebase</div>
         <div class="tech-lbl">Testing &amp; Monitoring</div>

@@ -1,0 +1,24 @@
+---
+import { TechPills } from '../ui';
+
+interface Props {
+  tech?: string[];
+  bullets?: string[];
+}
+
+const { tech = [], bullets = [] } = Astro.props;
+---
+
+<TechPills tech={tech} class="mt-4" />
+
+{
+  bullets.length > 0 && (
+    <ul class="mt-4 space-y-1.5">
+      {bullets.map((b) => (
+        <li class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-3 relative before:content-['–'] before:absolute before:left-0 before:text-neutral-300 dark:before:text-neutral-600">
+          {b}
+        </li>
+      ))}
+    </ul>
+  )
+}

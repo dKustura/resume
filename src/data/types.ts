@@ -6,15 +6,19 @@ export type IconType =
   | 'healthcare'
   | 'cloud';
 
-export interface ExperienceEntry {
+export interface ExperienceRole {
   role: string;
-  company: string;
-  companyUrl: string;
-  iconType: IconType;
   period: string;
   tech?: string[];
   bullets?: string[];
+}
+
+export interface ExperienceEntry {
+  company: string;
+  companyUrl: string;
+  iconType: IconType;
   note?: string;
+  roles: ExperienceRole[];
 }
 
 export interface ProjectEntry {

@@ -1,4 +1,6 @@
 ---
+import { TechPills } from '../ui';
+
 interface Props {
   title: string;
   link: string;
@@ -62,19 +64,6 @@ const { title, link, subtitle, description, period, tech = [] } = Astro.props;
         </p>
       )
     }
-    {
-      tech.length > 0 && (
-        <div class="flex flex-wrap gap-1.5 mt-4">
-          {tech.map((t) => (
-            <span
-              data-tech={t}
-              class="tech-pill px-3 py-1 text-xs rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 transition-colors cursor-default"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-      )
-    }
+    <TechPills tech={tech} class="mt-4" />
   </div>
 </article>
