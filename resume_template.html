@@ -37,14 +37,14 @@
   .hero {
     background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 100%);
     color: #ffffff;
-    padding: 7mm 14mm 6mm 14mm;
+    padding: 5mm 14mm 4.5mm 14mm;
     display: flex;
     gap: 18px;
     align-items: center;
   }
   .hero-photo {
-    width: 78px;
-    height: 78px;
+    width: 70px;
+    height: 70px;
     background: var(--primary);
     flex-shrink: 0;
     overflow: hidden;
@@ -71,7 +71,7 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: 600;
-    margin-bottom: 9px;
+    margin-bottom: 6px;
   }
   .hero-contact {
     display: flex;
@@ -90,7 +90,7 @@
   }
 
   /* ===== Body ===== */
-  .body { padding: 5mm 14mm 4mm 14mm; }
+  .body { padding: 4mm 14mm 2mm 14mm; }
 
   .section { margin-bottom: 6px; }
 
@@ -100,7 +100,7 @@
     color: var(--primary-deep);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -119,7 +119,7 @@
     background: var(--rule);
   }
 
-  .summary p { font-size: 8.3pt; line-height: 1.45; }
+  .summary p { font-size: 8.3pt; line-height: 1.38; }
   .summary b { color: var(--ink); font-weight: 600; }
 
   /* Experience entries */
@@ -127,7 +127,7 @@
     display: grid;
     grid-template-columns: 78px 1fr;
     gap: 12px;
-    margin-bottom: 11px;
+    margin-bottom: 6px;
     page-break-inside: avoid;
   }
   .entry-date {
@@ -160,27 +160,6 @@
     font-weight: 600;
   }
   .org a { color: inherit; text-decoration: none; }
-  /* Multiple roles at one company */
-  .subrole {
-    margin-top: 4px;
-    padding-left: 8px;
-    border-left: 1px solid var(--rule);
-  }
-  .subrole-h {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 8px;
-    font-size: 9pt;
-    font-weight: 700;
-    color: var(--ink);
-  }
-  .subrole-date {
-    font-size: 7.4pt;
-    font-weight: 600;
-    color: var(--primary);
-    letter-spacing: 0.4px;
-  }
   .stack {
     font-size: 7.6pt;
     color: var(--muted);
@@ -191,7 +170,7 @@
     list-style: none;
     margin-top: 2px;
     font-size: 8.1pt;
-    line-height: 1.32;
+    line-height: 1.28;
   }
   .bullets li {
     padding-left: 11px;
@@ -213,7 +192,7 @@
   .twocol .entry { grid-template-columns: 60px 1fr; gap: 10px; margin-bottom: 4px; }
 
   /* Project lines */
-  .proj { margin-bottom: 5px; }
+  .proj { margin-bottom: 4px; }
   .proj-head { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
   .proj-name {
     font-size: 9pt;
@@ -263,7 +242,7 @@
   .tech-grid {
     display: grid;
     grid-template-columns: 150px 1fr;
-    gap: 2px 14px;
+    gap: 1px 14px;
     align-items: baseline;
   }
   .tech-lbl {
@@ -319,7 +298,7 @@
     <!-- SUMMARY -->
     <div class="section summary">
       <div class="section-h">Summary</div>
-      <p>Senior software engineer with 7+ years building complex web applications in <b>React</b> and <b>TypeScript</b>, with full-stack experience in Scala, Node.js and .NET. Currently building an <b>AI-enhanced no-code platform</b> — logic editors, real-time updates and CKEditor-based rich-text authoring — and working AI-first day to day with Claude Code.</p>
+      <p>Senior software engineer with 7+ years building complex web applications in <b>React</b> and <b>TypeScript</b>, with full-stack experience in Node.js and .NET. Currently building an <b>AI-enhanced no-code platform</b> — logic editors, real-time updates and CKEditor-based rich-text authoring — and working AI-first day to day with Claude Code.</p>
     </div>
 
     <!-- EXPERIENCE -->
@@ -327,23 +306,24 @@
       <div class="section-h">Experience</div>
 
       <div class="entry">
-        <div class="entry-date">Sep 2022<br>Present</div>
+        <div class="entry-date">Sep 2026<br>Present</div>
         <div>
-          <div class="role"><span class="org"><a href="https://neota.com">Neota Logic</a></span></div>
-          <div class="subrole">
-            <div class="subrole-h">Senior Fullstack Engineer <span class="subrole-date">Sep 2026 – Present</span></div>
-            <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · Apollo · Tailwind CSS · CKEditor · Storybook · <b>Scala</b> · <b>Play Framework</b> · PostgreSQL</div>
-            <ul class="bullets"><li>Moved into a full-stack role, building backend services in Scala and Play Framework on PostgreSQL while continuing to own core front-end functionality of the no-code platform.</li></ul>
-          </div>
-          <div class="subrole">
-            <div class="subrole-h">Senior Frontend Engineer <span class="subrole-date">Sep 2022 – Aug 2026</span></div>
-            <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · Apollo · Tailwind CSS · CKEditor · Storybook</div>
-            <ul class="bullets">
-              <li>No-code platform letting lawyers, accountants, compliance officers and consultants build web applications.</li>
-              <li>Develop and maintain core front-end functionality — <b>theming, building blocks, logic editors, authoring utilities, real-time updates and validation</b>.</li>
-              <li>Advanced rich-text editing on CKEditor: custom interactive components connecting document content to underlying business logic.</li>
-            </ul>
-          </div>
+          <div class="role">Senior Fullstack Engineer <span class="org">— <a href="https://neota.com">Neota Logic</a></span></div>
+          <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · Apollo · Tailwind CSS · CKEditor · Storybook · <b>Scala</b> · <b>Play Framework</b> · PostgreSQL</div>
+          <ul class="bullets"><li>Building backend services in Scala / Play Framework on PostgreSQL while still owning core front-end features.</li></ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">Sep 2022<br>Aug 2026</div>
+        <div>
+          <div class="role">Senior Frontend Engineer <span class="org">— <a href="https://neota.com">Neota Logic</a></span></div>
+          <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · Apollo · Tailwind CSS · CKEditor · Storybook</div>
+          <ul class="bullets">
+            <li>No-code platform letting lawyers, accountants, compliance officers and consultants build web applications.</li>
+            <li>Develop and maintain core front-end functionality — <b>theming, building blocks, logic editors, authoring utilities, real-time updates and validation</b>.</li>
+            <li>Advanced rich-text editing on CKEditor: custom interactive components connecting document content to underlying business logic.</li>
+          </ul>
         </div>
       </div>
 
@@ -353,8 +333,7 @@
           <div class="role">Founder <span class="org">— <a href="https://codequst.com">Codequst</a></span></div>
           <div class="stack"><b>React</b> · <b>TypeScript</b> · <b>GraphQL</b> · .NET · Node.js · NestJS · Storybook · Cloudflare</div>
           <ul class="bullets">
-            <li>Running my own software agency, delivering client projects including a real-time, web-based IDE for a no-code platform.</li>
-            <li>Also working on launching a product of my own.</li>
+            <li>Running my own software agency — client work includes a real-time, web-based IDE for a no-code platform — while launching my own product.</li>
           </ul>
         </div>
       </div>
