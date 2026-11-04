@@ -1,0 +1,13 @@
+---
+// Decorative contribution graph in the empty margins beside the content column,
+// filling up as the page scrolls. Behaviour and tuning live in src/scripts/gutterStreak.ts.
+---
+
+<canvas data-gutter="left" aria-hidden="true" hidden class="pointer-events-none fixed -z-10"></canvas>
+<canvas data-gutter="right" aria-hidden="true" hidden class="pointer-events-none fixed -z-10"></canvas>
+
+<script>
+  import { startGutterStreak } from '../../scripts/gutterStreak'
+
+  startGutterStreak()
+</script>

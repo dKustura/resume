@@ -22,7 +22,7 @@ export const experience: ExperienceEntry[] = [
           'PostgreSQL',
         ],
         bullets: [
-          'Moved into a full-stack role, building backend services in Scala and Play Framework on PostgreSQL while continuing to own core front-end functionality of the no-code platform.',
+          'Moved into a full-stack role, building backend services in Scala and Play Framework on PostgreSQL while continuing to own core front-end functionality of the no‑code platform.',
         ],
       },
       {
@@ -64,7 +64,7 @@ export const experience: ExperienceEntry[] = [
           'Cloudflare',
         ],
         bullets: [
-          'Running my own software agency, delivering client projects including a real-time, web-based IDE for a no-code platform.',
+          'Running my own software agency, delivering client projects including a real-time, web-based IDE for a no‑code platform.',
           'Also working on launching a product of my own.',
         ],
       },

@@ -1,157 +1,86 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { Nav } from '../components/ui';
-import { ExperienceItem, ProjectItem, ResearchItem } from '../components/items';
+import Layout from '../layouts/Layout.astro'
+import { GutterStreak, Nav } from '../components/ui'
+import { ExperienceItem, ProjectItem, ResearchItem } from '../components/items'
 import {
-  ProfileSection,
-  SummarySection,
   EducationSection,
-  TechGrid,
   Interests,
-} from '../components/sections';
-import { experience, projects, research, education, techGroups } from '../data';
-
+  ProfileSection,
+  SectionHeading,
+  SummarySection,
+  TechGrid,
+} from '../components/sections'
+import { education, experience, projects, research, techGroups } from '../data'
 ---
 
 <Layout>
   <Nav />
+  <GutterStreak />
+
+  <!-- Solid background so the gutter animation only shows outside the column -->
   <div
-    class="max-w-6xl mx-auto border-x border-b border-neutral-200 dark:border-neutral-800"
+    data-gutter-column
+    class="mx-auto max-w-6xl border-x border-b border-neutral-200 bg-bg-light dark:border-neutral-800 dark:bg-bg-dark"
   >
     <!--
-      Mobile (<md, flex-col):  order-1 profile → order-2 main → order-3 tech/interests
-      Desktop (md+, grid):     col-1 main | col-2 combined sidebar (profile + education + tech + interests)
+      Mobile (<md, flex-col):  order-1 profile → order-2 main → order-3 education/tech/interests
+      Desktop (md+, grid):     col-1 main | col-2 sidebar, pinned once its bottom reaches the viewport
     -->
     <div class="flex flex-col md:grid md:grid-cols-[1fr_300px]">
-      <!-- ── SIDEBAR TOP: profile + education ─────────────────────────────── -->
-      <!-- Mobile: first | Desktop: right column, first row -->
-      <!-- Mobile-only sidebar top: shown above main content on small screens -->
-      <aside
-        class="order-1 md:hidden border-b border-neutral-200 dark:border-neutral-800"
-      >
-        <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
-          <ProfileSection variant="mobile" />
-          <EducationSection items={education} />
-        </div>
+      <aside class="order-1 border-b border-neutral-200 md:hidden dark:border-neutral-800">
+        <ProfileSection variant="mobile" />
       </aside>
 
-      <!-- ── MAIN CONTENT ───────────────────────────────────────────────── -->
-      <div
-        class="order-2 md:col-start-1 md:row-start-1 md:border-r border-neutral-200 dark:border-neutral-800"
+      <main
+        class="order-2 border-neutral-200 md:col-start-1 md:row-start-1 md:border-r dark:border-neutral-800"
       >
-        <!-- Summary -->
         <SummarySection />
 
-        <!-- Work Experience -->
         <section
           id="experience"
-          class="divide-y divide-neutral-200 dark:divide-neutral-800 border-b border-neutral-200 dark:border-neutral-800"
+          class="scroll-mt-14 divide-y divide-neutral-200 border-b border-neutral-200 dark:divide-neutral-800 dark:border-neutral-800"
         >
-          <div class="px-8 py-8">
-            <p
-              class="text-xs font-medium uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-1.5"
-            >
-              Career
-            </p>
-            <h2
-              class="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100"
-            >
-              Work Experience
-            </h2>
-          </div>
+          <SectionHeading eyebrow="Career" title="Work Experience" />
           {experience.map((item) => <ExperienceItem {...item} />)}
         </section>
 
-        <!-- Side Projects -->
         <section
           id="projects"
-          class="divide-y divide-neutral-200 dark:divide-neutral-800 border-b border-neutral-200 dark:border-neutral-800"
+          class="scroll-mt-14 divide-y divide-neutral-200 border-b border-neutral-200 dark:divide-neutral-800 dark:border-neutral-800"
         >
-          <div class="px-8 py-8">
-            <p
-              class="text-xs font-medium uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-1.5"
-            >
-              Other Work
-            </p>
-            <h2
-              class="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100"
-            >
-              Side Projects
-            </h2>
-          </div>
+          <SectionHeading eyebrow="Other Work" title="Side Projects" />
           {projects.map((item) => <ProjectItem {...item} />)}
         </section>
 
-        <!-- Research -->
-        <section
-          id="research"
-          class="divide-y divide-neutral-200 dark:divide-neutral-800"
-        >
-          <div class="px-8 py-8">
-            <p
-              class="text-xs font-medium uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-1.5"
-            >
-              Academic
-            </p>
-            <h2
-              class="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100"
-            >
-              Research
-            </h2>
-          </div>
+        <section id="research" class="scroll-mt-14 divide-y divide-neutral-200 dark:divide-neutral-800">
+          <SectionHeading eyebrow="Academic" title="Research" />
           {research.map((item) => <ResearchItem {...item} />)}
         </section>
-      </div>
+      </main>
 
-      <!-- ── DESKTOP SIDEBAR: full sidebar, right column (hidden on mobile) ── -->
-      <aside
-        class="hidden md:block md:col-start-2 md:row-start-1 md:self-start"
-      >
+      <!-- Desktop sidebar: scrolls with the page until its bottom reaches the viewport, then stays pinned -->
+      <aside class="hidden md:sticky md:bottom-0 md:col-start-2 md:row-start-1 md:block md:self-end">
         <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
           <ProfileSection variant="desktop" />
           <EducationSection items={education} />
-          <TechGrid groups={techGroups} />
+          <TechGrid groups={techGroups} variant="filter" />
           <Interests />
         </div>
       </aside>
 
-      <!-- ── MOBILE SIDEBAR BOTTOM: tech + interests (hidden on desktop) ─── -->
-      <aside
-        class="order-3 md:hidden border-t border-neutral-200 dark:border-neutral-800"
-      >
+      <aside class="order-3 border-t border-neutral-200 md:hidden dark:border-neutral-800">
         <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
-          <TechGrid groups={techGroups} />
+          <EducationSection items={education} />
+          <TechGrid groups={techGroups} variant="collapsible" />
           <Interests />
         </div>
       </aside>
     </div>
 
-    <footer
-      class="border-t border-neutral-200 dark:border-neutral-800 px-8 py-5"
-    >
+    <footer class="border-t border-neutral-200 px-5 py-5 sm:px-8 dark:border-neutral-800">
       <p class="text-xs text-neutral-400 dark:text-neutral-600">
         Denis Kustura &copy; {new Date().getFullYear()}
       </p>
     </footer>
   </div>
 </Layout>
-
-<script>
-  const activeSet = new Set<string>();
-
-  function syncPills() {
-    document.querySelectorAll<HTMLElement>('.tech-pill').forEach((el) => {
-      const tech = el.dataset.tech;
-      el.classList.toggle('active', !!tech && activeSet.has(tech));
-    });
-  }
-
-  document.querySelectorAll<HTMLElement>('.sidebar-pill').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const tech = btn.dataset.tech;
-      if (!tech) return;
-      activeSet.has(tech) ? activeSet.delete(tech) : activeSet.add(tech);
-      syncPills();
-    });
-  });
-</script>

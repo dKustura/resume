@@ -1,62 +1,36 @@
 ---
-import { TechPills } from '../ui';
+import { ExternalLink, TechPills } from '../ui'
+import type { ProjectEntry } from '../../data'
+import { filterableClass } from './filterable'
 
-interface Props {
-  title: string;
-  description?: string;
-  period: string;
-  tech?: string[];
-  link?: string;
-}
+type Props = ProjectEntry
 
-const { title, description, period, tech = [], link } = Astro.props;
+const { title, description, period, tech = [], link } = Astro.props
 ---
 
-<article>
-  <div class="px-8 py-7">
-    <div class="flex items-start justify-between gap-4 flex-wrap">
+<article data-filterable class={filterableClass}>
+  <div class="px-5 py-7 sm:px-8">
+    <div class="flex flex-wrap items-start justify-between gap-4">
       <h3 class="font-medium text-neutral-900 dark:text-neutral-100">
         {
-          link ? (
-            <a
+          link && (
+            <ExternalLink
               href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group inline-flex items-center gap-1 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-            >
-              {title}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="11"
-                height="11"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="opacity-0 group-hover:opacity-60 transition-opacity -mb-px"
-              >
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
-            </a>
-          ) : (
-            title
+              text={title}
+              class="transition-colors hover:text-emerald-600 dark:hover:text-emerald-400"
+            />
           )
         }
+        {!link && title}
       </h3>
-      <p
-        class="text-sm font-mono text-neutral-500 dark:text-neutral-400 mt-1 shrink-0 tabular-nums"
-      >
+      <p class="mt-1 shrink-0 font-mono text-sm text-neutral-500 tabular-nums dark:text-neutral-400">
         {period}
       </p>
     </div>
 
     {
       description && (
-        <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed">
+        <p class="mt-2 text-sm leading-relaxed text-pretty text-neutral-500 dark:text-neutral-400">
           {description}
         </p>
       )

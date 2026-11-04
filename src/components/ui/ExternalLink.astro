@@ -1,0 +1,18 @@
+---
+import ExternalIcon from './ExternalIcon.astro'
+
+type Props = {
+  href: string
+  text: string
+  class?: string
+}
+
+const { href, text, class: className } = Astro.props
+
+// Glue the ↗ to the last word so a wrapping title never strands it on the far edge
+const words = text.split(' ')
+const lastWord = words.pop()
+const leadingWords = words.join(' ')
+---
+
+<a href={href} target="_blank" rel="noopener noreferrer" class:list={['group', className]}>{leadingWords && `${leadingWords} `}<span class="whitespace-nowrap">{lastWord}<ExternalIcon class="ml-1 -mt-0.5 align-middle" /></span></a>

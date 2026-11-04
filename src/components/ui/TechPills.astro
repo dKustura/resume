@@ -1,37 +1,20 @@
 ---
-import { techGroups, type TechItem } from '../../data';
-import TechIcon from './TechIcon.astro';
+import TechPill from './TechPill.astro'
 
-interface Props {
-  tech: string[];
-  class?: string;
+type Props = {
+  tech: string[]
+  class?: string
 }
 
-const { tech, class: className } = Astro.props;
-
-// Reuse the sidebar icons so entry pills match the Technologies grid
-const techByName = new Map<string, TechItem>(
-  techGroups.flatMap((group) => group.items).map((item) => [item.name, item]),
-);
+const { tech, class: className } = Astro.props
 ---
 
 {
   tech.length > 0 && (
     <ul class:list={['flex flex-wrap gap-1.5', className]}>
-      {tech.map((t) => {
-        const item = techByName.get(t);
-        return (
-          <li
-            data-tech={t}
-            class="tech-pill inline-flex items-center gap-1.5 px-2 py-0.5 text-xs rounded-md bg-neutral-100/80 dark:bg-neutral-800/60 text-neutral-600 dark:text-neutral-400 border border-transparent transition-colors cursor-default"
-          >
-            {item?.icon && (
-              <TechIcon slug={item.icon} darkInvert={item.darkInvert} />
-            )}
-            {t}
-          </li>
-        );
-      })}
+      {tech.map((name) => (
+        <TechPill name={name} as="li" size="sm" />
+      ))}
     </ul>
   )
 }

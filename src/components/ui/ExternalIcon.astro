@@ -1,0 +1,26 @@
+---
+// ↗ for links that open a new tab; nudges up-right when the parent `group` is hovered
+type Props = {
+  class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2.25"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  class:list={[
+    'inline-block size-3 shrink-0 opacity-40 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-80',
+    className,
+  ]}
+>
+  <path d="M7 7h10v10"></path>
+  <path d="M7 17 17 7"></path>
+</svg><span class="sr-only"> (opens in a new tab)</span>

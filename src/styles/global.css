@@ -3,7 +3,9 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  /* Self-hosted by Astro's Fonts API (astro.config.mjs → <Font /> in Layout.astro) */
+  --font-sans: var(--font-inter, system-ui), sans-serif;
+  --font-mono: var(--font-geist-mono, ui-monospace), monospace;
 
   --color-bg-light: #fafafa;
   --color-bg-dark: #0a0a0a;
@@ -17,17 +19,32 @@
   --color-text-muted-dark: #a3a3a3;
   --color-accent: #6ee7b7;
   --color-accent-hover: #34d399;
-}
 
-html {
-  scroll-behavior: smooth;
+  /* Pulsing dot next to "Present" */
+  --animate-live-ping: live-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  /* Sun/moon swap in the theme toggle */
+  --animate-icon-in: icon-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  @keyframes live-ping {
+    70%,
+    100% {
+      transform: scale(2.6);
+      opacity: 0;
+    }
+  }
+
+  @keyframes icon-in {
+    from {
+      transform: rotate(-90deg) scale(0.5);
+      opacity: 0;
+    }
+  }
 }
 
 body {
   background-color: var(--color-bg-light);
   color: var(--color-text-primary-light);
   font-family: var(--font-sans);
-  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 html.dark body {
@@ -35,21 +52,12 @@ html.dark body {
   color: var(--color-text-primary-dark);
 }
 
-/* Active tech pill state */
-.tech-pill.active {
-  background-color: rgb(209 250 229 / 0.6); /* emerald-100/60 */
-  color: rgb(4 120 87);                      /* emerald-700 */
-  border-color: rgb(110 231 183);            /* emerald-300 */
+/* Theme switch: ThemeToggle animates a circular reveal of the new theme instead */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
-
-html.dark .tech-pill.active {
-  background-color: rgb(6 78 59 / 0.4);     /* emerald-900/40 */
-  color: rgb(110 231 183);                   /* emerald-300 */
-  border-color: rgb(16 185 129 / 0.5);      /* emerald-500/50 */
-}
-
-/* Safelist: dark:invert (applied via class:list in TechIcon.astro) */
-@source inline("dark:invert");
 
 /* Pop-in animation for download button */
 @keyframes fade-up-in {

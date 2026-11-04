@@ -1,72 +1,97 @@
 ---
-import { personal } from '../../data';
+import { personal } from '../../data'
 
-interface Props {
-  class?: string;
+type Props = {
+  /** text: icon + label · icon: square icon buttons (mobile profile) */
+  variant?: 'text' | 'icon'
+  class?: string
 }
-const { class: className = 'flex flex-wrap items-center gap-x-3 gap-y-1.5' } =
-  Astro.props;
+
+type SocialLink = {
+  label: string
+  href: string
+  icon: 'email' | 'linkedin' | 'github'
+  isExternal: boolean
+}
+
+const { variant = 'text', class: className } = Astro.props
+
+const links: SocialLink[] = [
+  { label: 'Email', href: `mailto:${personal.email}`, icon: 'email', isExternal: false },
+  { label: 'LinkedIn', href: personal.linkedin, icon: 'linkedin', isExternal: true },
+  { label: 'GitHub', href: personal.github, icon: 'github', isExternal: true },
+]
+
+const isIconOnly = variant === 'icon'
+const iconClass = { 'size-4': isIconOnly, 'size-[13px]': !isIconOnly }
 ---
 
-<div class={className}>
-  <a
-    href={`mailto:${personal.email}`}
-    class="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="13"
-      height="13"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-    </svg>
-    Email
-  </a>
-  <a
-    href={personal.linkedin}
-    target="_blank"
-    rel="noopener noreferrer"
-    class="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="13"
-      height="13"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-    >
-      <path
-        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
-      ></path>
-      <rect x="2" y="9" width="4" height="12"></rect>
-      <circle cx="4" cy="4" r="2"></circle>
-    </svg>
-    LinkedIn
-  </a>
-  <a
-    href={personal.github}
-    target="_blank"
-    rel="noopener noreferrer"
-    class="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="13"
-      height="13"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-    >
-      <path
-        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-      ></path>
-    </svg>
-    GitHub
-  </a>
+<div
+  class:list={[
+    'flex flex-wrap items-center',
+    { 'gap-x-3 gap-y-1.5': !isIconOnly, 'gap-2': isIconOnly },
+    className,
+  ]}
+>
+  {
+    links.map((link) => (
+      <a
+        href={link.href}
+        target={link.isExternal ? '_blank' : undefined}
+        rel={link.isExternal ? 'noopener noreferrer' : undefined}
+        aria-label={isIconOnly ? link.label : undefined}
+        title={isIconOnly ? link.label : undefined}
+        class:list={[
+          'inline-flex items-center text-neutral-500 transition-colors hover:text-emerald-600 dark:text-neutral-400 dark:hover:text-emerald-400',
+          {
+            'gap-1.5 text-sm': !isIconOnly,
+            'size-9 justify-center rounded-md border border-neutral-200 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-800':
+              isIconOnly,
+          },
+        ]}
+      >
+        {link.icon === 'email' && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            class:list={iconClass}
+          >
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+        )}
+        {link.icon === 'linkedin' && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            class:list={iconClass}
+          >
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+            <rect x="2" y="9" width="4" height="12" />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+        )}
+        {link.icon === 'github' && (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            class:list={iconClass}
+          >
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+          </svg>
+        )}
+        {!isIconOnly && link.label}
+      </a>
+    ))
+  }
 </div>

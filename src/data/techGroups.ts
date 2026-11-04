@@ -1,4 +1,4 @@
-import type { TechGroup } from './types';
+import type { TechGroup, TechItem } from './types'
 
 export const techGroups: TechGroup[] = [
   {
@@ -6,7 +6,7 @@ export const techGroups: TechGroup[] = [
     items: [
       { name: 'React', icon: 'react' },
       { name: 'Redux', icon: 'redux' },
-      { name: 'Next.js', icon: 'nextdotjs', darkInvert: true },
+      { name: 'Next.js', icon: 'nextdotjs' },
       { name: 'Tailwind CSS', icon: 'tailwindcss' },
       { name: 'Material UI', icon: 'mui' },
       { name: 'shadcn/ui', icon: null },
@@ -35,9 +35,9 @@ export const techGroups: TechGroup[] = [
     items: [
       { name: 'Node.js', icon: 'nodedotjs' },
       { name: 'NestJS', icon: 'nestjs' },
-      { name: 'Express.js', icon: 'express', darkInvert: true },
+      { name: 'Express.js', icon: 'express' },
       { name: 'GraphQL', icon: 'graphql' },
-      { name: 'Apollo', icon: 'apollographql', darkInvert: true },
+      { name: 'Apollo', icon: 'apollographql' },
       { name: 'REST APIs', icon: null },
       { name: '.NET', icon: 'dotnet' },
       { name: 'Play Framework', icon: null },
@@ -50,16 +50,16 @@ export const techGroups: TechGroup[] = [
       { name: 'MySQL', icon: 'mysql' },
       { name: 'MS SQL Server', icon: null },
       { name: 'MongoDB', icon: 'mongodb' },
-      { name: 'Prisma', icon: 'prisma', darkInvert: true },
+      { name: 'Prisma', icon: 'prisma' },
       { name: 'Firebase', icon: 'firebase' },
     ],
   },
   {
     label: 'Testing & Monitoring',
     items: [
-      { name: 'Cypress', icon: 'cypress', darkInvert: true },
+      { name: 'Cypress', icon: 'cypress' },
       { name: 'Playwright', icon: null },
-      { name: 'Sentry', icon: 'sentry', darkInvert: true },
+      { name: 'Sentry', icon: 'sentry' },
     ],
   },
   {
@@ -69,7 +69,12 @@ export const techGroups: TechGroup[] = [
       { name: 'Docker', icon: 'docker' },
       { name: 'Google Cloud', icon: 'googlecloud' },
       { name: 'Cloudflare', icon: 'cloudflare' },
-      { name: 'Claude Code', icon: 'anthropic', darkInvert: true },
+      { name: 'Claude Code', icon: 'anthropic' },
     ],
   },
-];
+]
+
+/** Lets entry pills reuse the icons from the Technologies list */
+export const techByName = new Map<string, TechItem>(
+  techGroups.flatMap((group) => group.items).map((item) => [item.name, item]),
+)

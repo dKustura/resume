@@ -1,19 +1,27 @@
 ---
-import '../styles/global.css';
-import { personal, experience } from '../data';
+import { Font, getImage } from 'astro:assets'
+import '../styles/global.css'
+import { personal, experience } from '../data'
 
-interface Props {
-  title?: string;
-  description?: string;
+type Props = {
+  title?: string
+  description?: string
 }
 
 const {
   title = 'Denis Kustura - Senior Software Engineer',
   description = 'Senior Software Engineer specializing in Full-stack web development.',
-} = Astro.props;
+} = Astro.props
 
-const ogUrl = new URL(Astro.url.pathname, Astro.site).href;
-const ogImage = new URL('/og-image.png', Astro.site).href;
+const ogUrl = new URL(Astro.url.pathname, Astro.site).href
+const ogImage = new URL('/og-image.png', Astro.site).href
+const avatarImage = await getImage({
+  src: personal.avatar,
+  width: 400,
+  height: 400,
+  fit: 'cover',
+  format: 'jpeg',
+})
 
 // Structured data so search engines can show a person card
 const personSchema = {
@@ -22,21 +30,23 @@ const personSchema = {
   name: personal.name,
   jobTitle: personal.title,
   url: Astro.site?.href,
-  image: new URL(personal.avatar, Astro.site).href,
+  image: new URL(avatarImage.src, Astro.site).href,
   sameAs: [personal.linkedin, personal.github],
   worksFor: {
     '@type': 'Organization',
     name: experience[0].company,
     url: experience[0].companyUrl,
   },
-};
+}
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="motion-safe:scroll-smooth scheme-light dark:scheme-dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Browser UI colour on mobile; the theme script below and ThemeToggle keep it in sync -->
+    <meta name="theme-color" content="#fafafa" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png" />
     <meta name="generator" content={Astro.generator} />
@@ -65,28 +75,25 @@ const personSchema = {
 
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts: self-hosted by Astro (see `fonts` in astro.config.mjs) -->
+    <Font cssVariable="--font-inter" preload={[{ subset: 'latin', weight: 400 }]} />
+    <Font cssVariable="--font-geist-mono" />
 
     <!-- Dark mode: set before paint to prevent flash -->
     <script is:inline>
       (function () {
-        const stored = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia(
-          '(prefers-color-scheme: dark)',
-        ).matches;
-        if (stored === 'dark' || (!stored && prefersDark)) {
-          document.documentElement.classList.add('dark');
-        }
-      })();
+        const stored = localStorage.getItem('theme')
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        const isDark = stored === 'dark' || (!stored && prefersDark)
+        if (!isDark) return
+        document.documentElement.classList.add('dark')
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#0a0a0a')
+      })()
     </script>
   </head>
-  <body>
+  <body
+    class="selection:bg-emerald-200/70 selection:text-emerald-950 dark:selection:bg-emerald-400/25 dark:selection:text-emerald-50"
+  >
     <slot />
   </body>
 </html>

@@ -1,19 +1,168 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
+import ResumeButton from './ResumeButton.astro'
+import ThemeToggle from './ThemeToggle.astro'
+
+type NavLink = {
+  label: string
+  href: `#${string}`
+}
+
+const navLinks: NavLink[] = [
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Research', href: '#research' },
+]
 ---
 
 <header
-  class="sticky top-0 z-50 bg-[#fafafa]/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800"
+  class="sticky top-0 z-50 border-b border-neutral-200 bg-bg-light/80 backdrop-blur-md dark:border-neutral-800 dark:bg-bg-dark/80"
 >
   <nav
-    class="max-w-6xl mx-auto px-8 h-14 flex items-center justify-between border-x border-neutral-200 dark:border-neutral-800"
+    data-nav
+    aria-label="Main"
+    class="mx-auto flex h-14 max-w-6xl items-center gap-8 border-x border-neutral-200 px-5 sm:px-8 dark:border-neutral-800"
   >
     <a
       href="#"
-      class="text-sm font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 hover:opacity-70 transition-opacity"
+      aria-label="Back to top"
+      class="text-sm font-semibold tracking-tight text-neutral-900 transition-opacity hover:opacity-70 dark:text-neutral-100"
     >
       DK
     </a>
-    <ThemeToggle />
+
+    <ul class="hidden h-full items-center gap-6 sm:flex">
+      {
+        navLinks.map((link) => (
+          <li class="h-full">
+            <a
+              href={link.href}
+              data-nav-link
+              class="relative flex h-full items-center text-sm text-neutral-500 transition-colors after:absolute after:inset-x-0 after:-bottom-px after:h-px after:origin-left after:scale-x-0 after:bg-emerald-500 after:transition-transform after:duration-300 hover:text-neutral-900 data-active:text-neutral-900 data-active:after:scale-x-100 dark:text-neutral-400 dark:after:bg-emerald-400 dark:hover:text-neutral-100 dark:data-active:text-neutral-100"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="ml-auto flex items-center gap-2">
+      <!-- Takes over from the profile's Resume button once that scrolls out of view -->
+      <span
+        data-header-resume
+        class="invisible translate-y-1 opacity-0 transition-[opacity,translate,visibility] duration-300 data-visible:visible data-visible:translate-y-0 data-visible:opacity-100"
+      >
+        <ResumeButton size="sm" />
+      </span>
+      <ThemeToggle />
+    </div>
   </nav>
 </header>
+
+<script>
+  // A section is current once its top passes this fraction of the viewport height
+  const ACTIVE_LINE = 0.25
+  // Sticky header height: things hidden under it don't count as visible
+  const HEADER_OFFSET = '-56px'
+  // A smooth scroll counts as finished once no scroll event has arrived for this long
+  const SCROLL_SETTLE_MS = 150
+
+  const nav = document.querySelector<HTMLElement>('[data-nav]')
+  const navLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]')]
+  const sections = navLinks
+    .map((link) => document.querySelector<HTMLElement>(link.hash))
+    .filter((section): section is HTMLElement => section !== null)
+
+  const setActiveSection = (id: string | undefined) => {
+    navLinks.forEach((link) => {
+      const isActive = link.hash === `#${id}`
+      link.toggleAttribute('data-active', isActive)
+      if (isActive) {
+        link.setAttribute('aria-current', 'location')
+        return
+      }
+      link.removeAttribute('aria-current')
+    })
+  }
+
+  const findCurrentSection = () => {
+    const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
+    if (isAtBottom) return sections.at(-1)
+    const activeLine = window.innerHeight * ACTIVE_LINE
+    return sections.filter((section) => section.getBoundingClientRect().top <= activeLine).at(-1)
+  }
+
+  // A clicked link is underlined right away and stays underlined while the page scrolls
+  // to it, instead of the underline visiting every section the scroll passes on the way
+  let isScrollingToLink = false
+  let settleTimer = 0
+  let isUpdateQueued = false
+
+  const waitForScrollToSettle = () => {
+    window.clearTimeout(settleTimer)
+    settleTimer = window.setTimeout(() => {
+      isScrollingToLink = false
+    }, SCROLL_SETTLE_MS)
+  }
+
+  const updateActiveSection = () => {
+    isUpdateQueued = false
+    if (isScrollingToLink) return
+    setActiveSection(findCurrentSection()?.id)
+  }
+
+  const handleScroll = () => {
+    if (isScrollingToLink) {
+      waitForScrollToSettle()
+      return
+    }
+    if (isUpdateQueued) return
+    isUpdateQueued = true
+    requestAnimationFrame(updateActiveSection)
+  }
+
+  const handleNavClick = (event: MouseEvent) => {
+    const isPlainClick = event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey
+    if (!isPlainClick || !(event.target instanceof Element)) return
+    const link = event.target.closest<HTMLAnchorElement>('a[href^="#"]')
+    if (!link) return
+    // "#" (back to top) has an empty hash, which clears the underline
+    setActiveSection(link.hash.slice(1))
+    isScrollingToLink = true
+    waitForScrollToSettle()
+  }
+
+  // Scrolling by hand takes over from a click's smooth scroll straight away
+  const handleUserScroll = () => {
+    if (!isScrollingToLink) return
+    isScrollingToLink = false
+    window.clearTimeout(settleTimer)
+  }
+
+  nav?.addEventListener('click', handleNavClick)
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  window.addEventListener('wheel', handleUserScroll, { passive: true })
+  window.addEventListener('touchmove', handleUserScroll, { passive: true })
+  window.addEventListener('keydown', handleUserScroll)
+  handleScroll()
+
+  // Show the header's Resume button while no profile Resume button is on screen
+  const headerResume = document.querySelector<HTMLElement>('[data-header-resume]')
+  const visibleResumeButtons = new Set<Element>()
+
+  const resumeObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          visibleResumeButtons.add(entry.target)
+          return
+        }
+        visibleResumeButtons.delete(entry.target)
+      })
+      headerResume?.toggleAttribute('data-visible', visibleResumeButtons.size === 0)
+    },
+    { rootMargin: `${HEADER_OFFSET} 0px 0px 0px` },
+  )
+
+  document.querySelectorAll('[data-resume-cta]').forEach((button) => resumeObserver.observe(button))
+</script>

@@ -1,18 +1,24 @@
 ---
-import * as simpleIcons from 'simple-icons';
-import type { SimpleIcon } from 'simple-icons';
+import * as simpleIcons from 'simple-icons'
+import type { SimpleIcon } from 'simple-icons'
+import { isDarkColor } from '../../lib/color'
 
-interface Props {
-  slug: string;
-  darkInvert?: boolean;
-  class?: string;
+type Props = {
+  slug: string
+  class?: string
 }
 
-const { slug, darkInvert, class: className = 'w-3 h-3' } = Astro.props;
+const { slug, class: className = 'size-3' } = Astro.props
 
 // Inlined at build time — "nextdotjs" → siNextdotjs
-const exportName = `si${slug[0].toUpperCase()}${slug.slice(1)}`;
-const icon = (simpleIcons as Record<string, SimpleIcon | undefined>)[exportName];
+const exportName = `si${slug[0].toUpperCase()}${slug.slice(1)}`
+const icon = (simpleIcons as Record<string, SimpleIcon | undefined>)[exportName]
+
+// Monochrome by default; the brand colour fades in when the pill is hovered or
+// active. Near-black brands (Next.js, Express, .NET…) would vanish on the dark
+// theme, so they stay monochrome there.
+const brandColor = icon ? `#${icon.hex}` : 'currentColor'
+const brandColorOnDark = icon && isDarkColor(icon.hex) ? 'currentColor' : brandColor
 ---
 
 {
@@ -20,9 +26,15 @@ const icon = (simpleIcons as Record<string, SimpleIcon | undefined>)[exportName]
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={`#${icon.hex}`}
       aria-hidden="true"
-      class:list={['shrink-0', className, { 'dark:invert': darkInvert }]}
+      style={`--brand-light: ${brandColor}; --brand-dark: ${brandColorOnDark}`}
+      class:list={[
+        'shrink-0 fill-current opacity-60 transition',
+        '[--brand:var(--brand-light)] dark:[--brand:var(--brand-dark)]',
+        'group-hover:fill-(--brand) group-hover:opacity-100',
+        'group-data-active:fill-(--brand) group-data-active:opacity-100',
+        className,
+      ]}
     >
       <path d={icon.path} />
     </svg>

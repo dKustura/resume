@@ -1,24 +1,15 @@
 ---
-import { personal } from '../../data';
+import { personal } from '../../data'
 ---
 
+<!-- The opening paragraph reads as the summary on its own; the heading is for screen readers -->
 <section
   id="summary"
-  class="px-8 py-8 border-b border-neutral-200 dark:border-neutral-800"
+  aria-labelledby="summary-heading"
+  class="border-b border-neutral-200 px-5 py-8 sm:px-8 sm:py-10 dark:border-neutral-800"
 >
-  <p
-    class="text-xs font-medium uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-1.5"
-  >
-    About
-  </p>
-  <h2
-    class="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100"
-  >
-    Summary
-  </h2>
-  <p
-    class="mt-4 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-prose"
-  >
+  <h2 id="summary-heading" class="sr-only">Summary</h2>
+  <p class="max-w-prose text-base leading-relaxed text-pretty text-neutral-700 dark:text-neutral-300">
     {personal.summary}
   </p>
 </section>

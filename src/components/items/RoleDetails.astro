@@ -1,12 +1,12 @@
 ---
-import { TechPills } from '../ui';
+import { TechPills } from '../ui'
 
-interface Props {
-  tech?: string[];
-  bullets?: string[];
+type Props = {
+  tech?: string[]
+  bullets?: string[]
 }
 
-const { tech = [], bullets = [] } = Astro.props;
+const { tech = [], bullets = [] } = Astro.props
 ---
 
 <TechPills tech={tech} class="mt-4" />
@@ -14,9 +14,9 @@ const { tech = [], bullets = [] } = Astro.props;
 {
   bullets.length > 0 && (
     <ul class="mt-4 space-y-1.5">
-      {bullets.map((b) => (
-        <li class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed pl-3 relative before:content-['–'] before:absolute before:left-0 before:text-neutral-300 dark:before:text-neutral-600">
-          {b}
+      {bullets.map((bullet) => (
+        <li class="relative pl-3 text-sm leading-relaxed text-pretty text-neutral-600 before:absolute before:left-0 before:text-neutral-300 before:content-['–'] dark:text-neutral-400 dark:before:text-neutral-600">
+          {bullet}
         </li>
       ))}
     </ul>

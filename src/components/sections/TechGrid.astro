@@ -1,48 +1,148 @@
 ---
-import { TechIcon } from '../ui';
+import { TechPill } from '../ui'
+import type { TechGroup } from '../../data'
 
-interface TechItem {
-  name: string;
-  icon: string | null;
-  darkInvert?: boolean;
+type Props = {
+  groups: TechGroup[]
+  /**
+   * filter: clickable pills that highlight where each tech was used (desktop sidebar)
+   * collapsible: static pills behind a disclosure toggle (mobile)
+   */
+  variant: 'filter' | 'collapsible'
 }
-interface TechGroup {
-  label: string;
-  items: TechItem[];
-}
-interface Props {
-  groups: TechGroup[];
-}
-const { groups } = Astro.props;
+
+const { groups, variant } = Astro.props
+
+const isFilter = variant === 'filter'
+const Container = isFilter ? 'div' : 'details'
+const pillElement = isFilter ? 'button' : 'span'
+const techCount = groups.reduce((total, group) => total + group.items.length, 0)
 ---
 
-<div class="px-8 py-8 space-y-6">
-  <p
-    class="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
-  >
-    Technologies
-  </p>
+<Container class="group/tech px-5 py-8 sm:px-8">
   {
-    groups.map((group) => (
-      <div class="space-y-2">
-        <p class="text-xs text-neutral-400 dark:text-neutral-500">
-          {group.label}
-        </p>
-        <div class="flex flex-wrap gap-1.5">
-          {group.items.map((item) => (
-            <button
-              type="button"
-              data-tech={item.name}
-              class="sidebar-pill tech-pill inline-flex items-center gap-1.5 px-3 py-1 text-xs rounded-md bg-neutral-100 dark:bg-neutral-800/80 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 hover:border-emerald-400 dark:hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors cursor-pointer"
-            >
-              {item.icon && (
-                <TechIcon slug={item.icon} darkInvert={item.darkInvert} />
-              )}
-              {item.name}
-            </button>
-          ))}
+    isFilter && (
+      <div>
+        <div class="flex items-center justify-between gap-4">
+          <p class="text-xs font-medium tracking-widest text-neutral-400 uppercase dark:text-neutral-500">
+            Technologies
+          </p>
+          <button
+            type="button"
+            data-tech-clear
+            class="invisible rounded-sm text-xs font-medium text-emerald-600 opacity-0 transition hover:text-emerald-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 data-visible:visible data-visible:opacity-100 dark:text-emerald-400 dark:hover:text-emerald-300"
+          >
+            Clear
+          </button>
         </div>
+        <p data-tech-hint aria-live="polite" class="mt-1.5 text-xs text-neutral-400 dark:text-neutral-500">
+          Click to highlight where I used it
+        </p>
       </div>
-    ))
+    )
   }
-</div>
+
+  {
+    !isFilter && (
+      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
+        <span class="text-xs font-medium tracking-widest text-neutral-400 uppercase dark:text-neutral-500">
+          Technologies
+          <span class="tracking-normal normal-case">· {techCount}</span>
+        </span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          class="size-4 text-neutral-400 transition-transform group-open/tech:rotate-180"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </summary>
+    )
+  }
+
+  <div class="mt-6 space-y-6">
+    {
+      groups.map((group) => (
+        <div class="space-y-2">
+          <p class="text-xs text-neutral-400 dark:text-neutral-500">{group.label}</p>
+          <div class="flex flex-wrap gap-1.5">
+            {group.items.map((item) => (
+              <TechPill name={item.name} as={pillElement} />
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</Container>
+
+<script>
+  // Highlights the pills of every selected tech and fades the entries that use none of them
+
+  const activeTechs = new Set<string>()
+
+  const filterButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-tech-filter]')]
+  const pills = [...document.querySelectorAll<HTMLElement>('[data-tech]')]
+  const entries = [...document.querySelectorAll<HTMLElement>('[data-filterable]')]
+  // Innermost entries (a role, project or paper) are what the hint counts
+  const leafEntries = entries.filter((entry) => !entry.querySelector('[data-filterable]'))
+  const clearButton = document.querySelector<HTMLButtonElement>('[data-tech-clear]')
+  const hint = document.querySelector<HTMLElement>('[data-tech-hint]')
+  const idleHint = hint?.textContent?.trim() ?? ''
+
+  const isActive = (element: HTMLElement) => activeTechs.has(element.dataset.tech ?? '')
+
+  const usesActiveTech = (entry: HTMLElement) =>
+    [...entry.querySelectorAll<HTMLElement>('[data-tech]')].some(isActive)
+
+  const describeMatches = (count: number) => `${count} ${count === 1 ? 'match' : 'matches'}`
+
+  const syncFilter = () => {
+    const isFiltering = activeTechs.size > 0
+
+    pills.forEach((pill) => pill.toggleAttribute('data-active', isActive(pill)))
+    filterButtons.forEach((button) => button.setAttribute('aria-pressed', String(isActive(button))))
+
+    // Document order visits a company before its roles: when the whole company is
+    // faded, its roles are left alone so they don't fade twice
+    entries.forEach((entry) => {
+      const isInsideFaded = Boolean(entry.parentElement?.closest('[data-dimmed]'))
+      entry.toggleAttribute('data-dimmed', isFiltering && !isInsideFaded && !usesActiveTech(entry))
+    })
+
+    clearButton?.toggleAttribute('data-visible', isFiltering)
+    if (!hint) return
+    hint.textContent = isFiltering ? describeMatches(leafEntries.filter(usesActiveTech).length) : idleHint
+  }
+
+  const handleFilterClick = (event: MouseEvent) => {
+    const tech = (event.currentTarget as HTMLElement).dataset.tech
+    if (!tech) return
+    if (activeTechs.has(tech)) {
+      activeTechs.delete(tech)
+    } else {
+      activeTechs.add(tech)
+    }
+    syncFilter()
+  }
+
+  const handleClearClick = () => {
+    activeTechs.clear()
+    syncFilter()
+  }
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key !== 'Escape' || activeTechs.size === 0) return
+    handleClearClick()
+  }
+
+  filterButtons.forEach((button) => button.addEventListener('click', handleFilterClick))
+  clearButton?.addEventListener('click', handleClearClick)
+  document.addEventListener('keydown', handleKeyDown)
+</script>
